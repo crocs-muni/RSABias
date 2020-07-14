@@ -1,10 +1,10 @@
 # Key classification model
 
-This folder contains a single classification model used in our study. The model is a complex Bayes classifier built over the [5p_5q_blum_mod_roca.json](https://github.com/matusn/RSABias/blob/master/model/transformations/5p_5q_blum_mod_roca.json) feature vector. This document also provides a consise explanation of how we define the groups of the RSA keys (labels or classes in ML terminology) and how we represent our transformations (features in ML terminology).
+This folder contains a single classification model used in our study. The model is a complex Bayes classifier built over the [5p_5q_blum_mod_roca.json](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/transformations/5p_5q_blum_mod_roca.json) feature vector. This document also provides a consise explanation of how we define the groups of the RSA keys (labels or classes in ML terminology) and how we represent our transformations (features in ML terminology).
 
 ## Bayes classifier
 
-The model is provided in a form of a pickle object -- [classification_table_complex.pkl](https://github.com/matusn/RSABias/blob/master/model/classification_table_complex.pkl) -- that represents  an instance of `ProbaTable` class in the [classifier](https://github.com/matusn/RSABias/blob/master/rsabias/classifier.py) module. The model can be directly used with our tool as a command-line argument (see readme in the root of the repository).
+The model is provided in a form of a pickle object -- [classification_table_complex.pkl](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/classification_table_complex.pkl) -- that represents  an instance of `ProbaTable` class in the [classifier](https://github.com/crocs-muni/RSABias/blob/master/rsabias/core/classifier.py) module. The model can be directly used with our tool as a command-line argument (see readme in the root of the repository).
 
 If the developer aims to reconstruct the model by himself, it can be done by calling
 
@@ -16,15 +16,15 @@ table.load_classification_tables(table_path, method)
 
 where
 
-- `trans_path` is a path to [5p_5q_blum_mod_roca.json](https://github.com/matusn/RSABias/blob/master/model/transformations/5p_5q_blum_mod_roca.json).
-- `groups_json_path` is a path to [groups.json](https://github.com/matusn/RSABias/blob/master/model/groups/groups.json).
+- `trans_path` is a path to [5p_5q_blum_mod_roca.json](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/transformations/5p_5q_blum_mod_roca.json).
+- `groups_json_path` is a path to [groups.json](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/groups/groups.json).
 - `method` use a string `complex`.
 
-Then, the model should reside in the `table` variable. Further, it is possible to build the [evaluator](https://github.com/matusn/RSABias/blob/master/rsabias/classifier.py) (that runs over a dataset) object with the `table` variable. Using the `Evaluator` object, many interesting tasks can be called that can result the whole dataset.
+Then, the model should reside in the `table` variable. Further, it is possible to build the [evaluator](https://github.com/crocs-muni/RSABias/blob/master/rsabias/core/classifier.py) (that runs over a dataset) object with the `table` variable. Using the `Evaluator` object, many interesting tasks can be called that can result the whole dataset.
 
 ## Groups description
 
-The groups, demonstrated in [groups.json](TBA), illustrate the clustering task (discussed in [the paper](TBA), section 2.3). Put simply, `groups.json` are a dictionary of lists. The key of each dictionary is a name of the group. Its values (a list) form the sources that produce very similar RSA keys. For instance, see the example below:
+The groups, demonstrated in [groups.json](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/groups/groups.json), illustrate the clustering task (discussed in [the paper](TBA), section 2.3). Put simply, `groups.json` are a dictionary of lists. The key of each dictionary is a name of the group. Its values (a list) form the sources that produce very similar RSA keys. For instance, see the example below:
 
 ```json
 {
@@ -62,9 +62,9 @@ This directory contains description of transformations (or features) that were a
 - `prime_wise.json` - 5 features extracted only from a single prime. Used to classify batches of GCD-factorized keys.
 - `private_simple.json` - an example of feature vector, not really used in our models.
 
-The source file [features.py](https://github.com/matusn/RSABias/blob/master/rsabias/features.py) lists all viable options for the features. Yet, a developer is welcomed to write his own features and introduce them into the codebase. The individual features are then combined into a *feature vector*. The *feature vector* is represented as a `.json` file and applied to every key in the dataset to construct a model. A feature vector is an inherent part of the model and must accompany most of the task specifications. 
+The source file [features.py](https://github.com/crocs-muni/RSABias/blob/master/rsabias/core/features.py) lists all viable options for the features. Yet, a developer is welcomed to write his own features and introduce them into the codebase. The individual features are then combined into a *feature vector*. The *feature vector* is represented as a `.json` file and applied to every key in the dataset to construct a model. A feature vector is an inherent part of the model and must accompany most of the task specifications. 
 
-The distributions of the feature vector on the whole dataset are pre-computed in the [model/distribution](TBA) folder.
+The distributions of the feature vector on the whole dataset are pre-computed in the [model/distribution](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model/distributions) folder.
 
 The rest of this document illustrates how to read the json files.
 
@@ -86,7 +86,7 @@ The exact feature vector captured by `5p_5q_blum_mod_roca.json` is described in 
 
 ## Distribution description
 
-The folder distribution list the complete probability distribution on the feature vector `5p_5q_blum_mod_roca.json` of our dataset. For each of the sources and for every encountered feature vector instance, a number of keys is displayed in the respective json file. For instance, 512b keys of Athena IDProtect card exhibit 499 keys with the feature vector `(24, 27, False, 1, False)`, as depicted by [dist.json](https://github.com/matusn/RSABias/blob/master/model/distributions/Card/Athena/IDProtect/512/dist.json) on line 5:
+The folder distribution list the complete probability distribution on the feature vector `5p_5q_blum_mod_roca.json` of our dataset. For each of the sources and for every encountered feature vector instance, a number of keys is displayed in the respective json file. For instance, 512b keys of Athena IDProtect card exhibit 499 keys with the feature vector `(24, 27, False, 1, False)`, as depicted by [dist.json](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/distributions/Card/Athena/IDProtect/512/dist.json) on line 5:
 
 ```json
 "(24, 27, False, 1, False)": 499,
