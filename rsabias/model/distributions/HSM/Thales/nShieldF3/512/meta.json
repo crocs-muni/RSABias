@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "HSM",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Thales",
+        "public_only": false,
+        "separator": null,
+        "version": "nShieldF3"
+    },
+    "files": [
+        {
+            "name": "f67219e91b94c4b2.json.gz",
+            "records": 990000,
+            "sha256": "f67219e91b94c4b2c6e7df5f95a2dd11e56d40b8404a7d1ddb910ece9d9fb5d6"
+        }
+    ],
+    "type": "reference"
+}

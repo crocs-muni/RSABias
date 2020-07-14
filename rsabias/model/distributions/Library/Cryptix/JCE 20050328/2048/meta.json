@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Cryptix",
+        "public_only": false,
+        "separator": null,
+        "version": "JCE 20050328"
+    },
+    "files": [
+        {
+            "name": "9637e9316d3fc906.json.gz",
+            "records": 100000,
+            "sha256": "9637e9316d3fc90618ef68ebac6df19e2c1b7eea4c6024cd942dd1ed44611e6b"
+        }
+    ],
+    "type": "reference"
+}

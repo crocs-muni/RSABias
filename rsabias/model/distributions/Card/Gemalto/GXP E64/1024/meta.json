@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Gemalto",
+        "public_only": false,
+        "separator": null,
+        "version": "GXP E64"
+    },
+    "files": [
+        {
+            "name": "72a941df7b9ab9c8.json.gz",
+            "records": 40000,
+            "sha256": "72a941df7b9ab9c8a9f0dad25971d0b5962d596c05da94b72253d06e1588d25f"
+        }
+    ],
+    "type": "reference"
+}

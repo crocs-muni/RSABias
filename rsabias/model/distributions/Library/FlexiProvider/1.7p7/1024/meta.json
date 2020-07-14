@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "FlexiProvider",
+        "public_only": false,
+        "separator": null,
+        "version": "1.7p7"
+    },
+    "files": [
+        {
+            "name": "557d841f758d569d.json.gz",
+            "records": 1090000,
+            "sha256": "557d841f758d569d8b6e99c5f89a85d4d41123f05249c0ba78a7ed1054bf15c9"
+        }
+    ],
+    "type": "reference"
+}

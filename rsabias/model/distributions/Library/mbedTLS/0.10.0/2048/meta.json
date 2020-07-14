@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "mbedTLS",
+        "public_only": false,
+        "separator": null,
+        "version": "0.10.0"
+    },
+    "files": [
+        {
+            "name": "f580af4de3e5b137.json.gz",
+            "records": 100000,
+            "sha256": "f580af4de3e5b1374c04ad6393af06894eb4de3a80febbfb011a24f470708a6c"
+        }
+    ],
+    "type": "reference"
+}

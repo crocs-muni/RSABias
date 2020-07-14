@@ -1,0 +1,9 @@
+                every head row/.style={after row=\hline},
+                every last row/.style={before row=\hline \rowstyle{\bfseries}},
+                color cells={min=-100,max=100,textcolor=black},
+                /pgfplots/colormap={blackwhite}{rgb255=(165,225,165) color=(white) rgb255=(165,225,165)},
+                /pgf/number format/fixed,
+                /pgf/number format/precision=1,
+                postproc cell content/.append style={/pgfplots/table/@cell content/.add={}{\%},},
+                col sep=comma,]
+                

@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": true,
+        "format": "json",
+        "header": null,
+        "name": "PGP SDK",
+        "public_only": false,
+        "separator": null,
+        "version": "4"
+    },
+    "files": [
+        {
+            "name": "e44ec386de627a0d.json.gz",
+            "records": 127655,
+            "sha256": "e44ec386de627a0d1f3017b608ffc8fd091b73f9115845644c20bc8652f36b32"
+        }
+    ],
+    "type": "reference"
+}

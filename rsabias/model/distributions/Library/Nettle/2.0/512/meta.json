@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Nettle",
+        "public_only": false,
+        "separator": null,
+        "version": "2.0"
+    },
+    "files": [
+        {
+            "name": "2e6a2c87a183f172.json.gz",
+            "records": 1090000,
+            "sha256": "2e6a2c87a183f1727bca131aed2a6f85bced582f26c8f57ab2593141746da1be"
+        }
+    ],
+    "type": "reference"
+}

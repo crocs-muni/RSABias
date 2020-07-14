@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "WolfSSL",
+        "public_only": false,
+        "separator": null,
+        "version": "3.9.0"
+    },
+    "files": [
+        {
+            "name": "e7d01efce9fdbd58.json.gz",
+            "records": 210000,
+            "sha256": "e7d01efce9fdbd5885c706adfd7518dad38c50b1609d3ca37c33ac92b99491ee"
+        }
+    ],
+    "type": "reference"
+}

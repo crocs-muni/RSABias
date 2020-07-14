@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "NXP",
+        "public_only": false,
+        "separator": null,
+        "version": "JCOP 41 V2.2.1"
+    },
+    "files": [
+        {
+            "name": "d8218aee195bb02c.json.gz",
+            "records": 40000,
+            "sha256": "d8218aee195bb02c9265682f4b96ad8fe750e9e360db794867024aaaefe57abb"
+        }
+    ],
+    "type": "reference"
+}

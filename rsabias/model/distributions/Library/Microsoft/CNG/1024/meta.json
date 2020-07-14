@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Microsoft",
+        "public_only": false,
+        "separator": null,
+        "version": "CNG"
+    },
+    "files": [
+        {
+            "name": "3422f3b43cf6d221.json.gz",
+            "records": 1090000,
+            "sha256": "3422f3b43cf6d22102f6f95eb252fc10d8c7de0c77271ab271531ab2c6d3dc4c"
+        }
+    ],
+    "type": "reference"
+}

@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Gemalto",
+        "public_only": false,
+        "separator": null,
+        "version": "GCX4 72K"
+    },
+    "files": [
+        {
+            "name": "12cba7223cda6674.json.gz",
+            "records": 190000,
+            "sha256": "12cba7223cda667459fc21722e9c70b9ab271c7c13d71f654a9e92f1a4a6994a"
+        }
+    ],
+    "type": "reference"
+}

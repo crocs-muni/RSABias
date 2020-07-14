@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "NXP",
+        "public_only": false,
+        "separator": null,
+        "version": "J2E145G"
+    },
+    "files": [
+        {
+            "name": "2acc14148ae30d90.json.gz",
+            "records": 90000,
+            "sha256": "2acc14148ae30d902b2198c19026d0296f51abb5a55a1983157422b4941a0282"
+        }
+    ],
+    "type": "reference"
+}

@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Microsoft",
+        "public_only": false,
+        "separator": null,
+        "version": "CryptoAPI"
+    },
+    "files": [
+        {
+            "name": "13e98e827954aff2.json.gz",
+            "records": 100000,
+            "sha256": "13e98e827954aff2713d271b8020153466c75e1ba0157a3b0df4dca2b1a6a823"
+        }
+    ],
+    "type": "reference"
+}

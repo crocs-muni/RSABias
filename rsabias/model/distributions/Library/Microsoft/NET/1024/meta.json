@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Microsoft",
+        "public_only": false,
+        "separator": null,
+        "version": ".NET"
+    },
+    "files": [
+        {
+            "name": "53b520c4ec51ed69.json.gz",
+            "records": 790000,
+            "sha256": "53b520c4ec51ed69a25f7a866db9e0043ef9d392b0950c3d5554ea028d96e878"
+        }
+    ],
+    "type": "reference"
+}

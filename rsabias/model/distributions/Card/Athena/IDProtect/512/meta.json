@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Athena",
+        "public_only": false,
+        "separator": null,
+        "version": "IDProtect"
+    },
+    "files": [
+        {
+            "name": "07d9d47f8d1027be.json.gz",
+            "records": 50087,
+            "sha256": "07d9d47f8d1027beec87065341e1d1cc91ce243ff7e487a99351b8baa14a46f7"
+        }
+    ],
+    "type": "reference"
+}

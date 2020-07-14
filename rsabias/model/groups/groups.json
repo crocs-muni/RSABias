@@ -1,0 +1,238 @@
+{
+    "16": [
+        "HSM Utimaco Security Server Se50 LAN Appliance 1024",
+        "HSM Utimaco Security Server Se50 LAN Appliance 512"
+    ],
+    "11": [
+        "HSM SafeNet Luna SA-1700 LAN 2048",
+        "Card Feitian JavaCOS A22 1024",
+        "Card Feitian JavaCOS A22 512",
+        "Card Feitian JavaCOS A40 1024",
+        "Card Feitian JavaCOS A40 512",
+        "Card Oberthur Cosmo 64 1024",
+        "Library cryptlib 3.4.3.1 1024",
+        "Library cryptlib 3.4.3.1 2048",
+        "Library cryptlib 3.4.3.1 512",
+        "Library cryptlib 3.4.3 1024",
+        "Library cryptlib 3.4.3 2048",
+        "Library cryptlib 3.4.3 512"
+    ],
+    "10": [
+        "HSM Thales nShieldF3 512",
+        "Library Mocana new 1024",
+        "Library Bouncy Castle 1.54 1024",
+        "Library Bouncy Castle 1.54 2048",
+        "Library Bouncy Castle 1.54 512"
+    ],
+    "3": [
+        "Card G&D SmartCafe 3.2 1024",
+        "Card G&D SmartCafe 3.2 512"
+    ],
+    "26": [
+        "Card G&D StarSign 512"
+    ],
+    "2": [
+        "Card G&D SmartCafe 6.0 1024",
+        "Card G&D SmartCafe 6.0 512",
+        "Card G&D SmartCafe 4.x 1024",
+        "Card G&D SmartCafe 4.x 512"
+    ],
+    "12": [
+        "Card Taisys SIMoME VAULT 512"
+    ],
+    "21": [
+        "Card NXP JCOP 41 V2.2.1 1024",
+        "Card NXP JCOP 41 V2.2.1 512",
+        "Card NXP J2A081 1024",
+        "Card NXP J2A081 512",
+        "Card NXP J2A080 1024",
+        "Card NXP J2A080 512",
+        "Card NXP J3A081 1024",
+        "Card NXP J3A081 512"
+    ],
+    "23": [
+        "Card NXP J2E145G 1024",
+        "Card NXP J2D081 1024"
+    ],
+    "22": [
+        "Card NXP J2E145G 512",
+        "Card NXP J2D081 512"
+    ],
+    "1": [
+        "Card Infineon JTOP 80K 1024",
+        "Card Infineon JTOP 80K 512"
+    ],
+    "15": [
+        "Card Gemalto GCX4 72K 1024",
+        "Card Gemalto GCX4 72K 512",
+        "Card Athena IDProtect 512",
+        "Library Nettle 3.2 1024",
+        "Library Nettle 3.2 2048",
+        "Library Nettle 3.2 512",
+        "Library Nettle 3.3 1024",
+        "Library Nettle 3.3 2048",
+        "Library Nettle 3.3 512",
+        "Library LibTomCrypt 1.17 1024",
+        "Library LibTomCrypt 1.17 2048",
+        "Library LibTomCrypt 1.17 512",
+        "Library OpenSSL 1.0.2g 2.0.12 fips FIPS 1024",
+        "Library OpenSSL 1.0.2g 2.0.12 fips FIPS 2048",
+        "Library OpenSSL 1.0.2g 2.0.12 fips FIPS 512",
+        "Library OpenSSL 1.0.2k 2.0.14 fips FIPS 1024",
+        "Library OpenSSL 1.0.2k 2.0.14 fips FIPS 2048",
+        "Library OpenSSL 1.0.2k 2.0.14 fips FIPS 512",
+        "Library OpenSSL 2.0.12 FIPS 1024",
+        "Library OpenSSL 2.0.12 FIPS 2048",
+        "Library OpenSSL 2.0.12 FIPS 512",
+        "Library Botan 1.11.29 1024",
+        "Library Botan 1.11.29 2048",
+        "Library Botan 1.11.29 512",
+        "Library Botan 2.1.0 2048",
+        "Library Botan 2.1.0 512",
+        "Library Botan 1.5.6 1024",
+        "Library Botan 1.5.6 2048",
+        "Library Botan 1.5.6 512",
+        "Library WolfSSL 3.9.0 1024",
+        "Library WolfSSL 3.9.0 2048",
+        "Library WolfSSL 3.9.0 512",
+        "Library WolfSSL 3.10.2 1024",
+        "Library WolfSSL 3.10.2 2048",
+        "Library WolfSSL 3.10.2 512",
+        "Library WolfSSL 2.0rc1 1024",
+        "Library WolfSSL 2.0rc1 2048",
+        "Library WolfSSL 2.0rc1 512"
+    ],
+    "13": [
+        "Card Gemalto GXP E64 1024",
+        "Card Gemalto GXP E64 512"
+    ],
+    "20": [
+        "Card Oberthur Cosmo Dual 72K 1024",
+        "Card Oberthur Cosmo Dual 72K 512"
+    ],
+    "8": [
+        "Library PuTTY 0.67 1024",
+        "Library mbedTLS 0.10.0 1024",
+        "Library mbedTLS 0.10.0 2048",
+        "Library mbedTLS 0.10.0 512",
+        "Library mbedTLS 1.3.19 1024",
+        "Library mbedTLS 1.3.19 2048",
+        "Library mbedTLS 1.3.19 512",
+        "Library mbedTLS 2.4.2 1024",
+        "Library mbedTLS 2.4.2 2048",
+        "Library mbedTLS 2.4.2 512",
+        "Library mbedTLS 2.2.1 1024",
+        "Library mbedTLS 2.2.1 2048",
+        "Library mbedTLS 2.2.1 512"
+    ],
+    "5": [
+        "Library Mocana 6.x 2048",
+        "Library Mocana 6.x 512"
+    ],
+    "19": [
+        "Library GNU Crypto 2.0.1 1024",
+        "Library GNU Crypto 2.0.1 2048",
+        "Library GNU Crypto 2.0.1 512"
+    ],
+    "17": [
+        "Library Nettle 2.0 1024",
+        "Library Nettle 2.0 2048",
+        "Library Nettle 2.0 512",
+        "Library Cryptix JCE 20050328 1024",
+        "Library Cryptix JCE 20050328 2048",
+        "Library Cryptix JCE 20050328 512",
+        "Library Sage Default 512",
+        "Library FlexiProvider 1.7p7 1024",
+        "Library FlexiProvider 1.7p7 2048",
+        "Library FlexiProvider 1.7p7 512"
+    ],
+    "24": [
+        "Library OpenSSL 1.0.2g 2.0.12 fips 1024",
+        "Library OpenSSL 1.0.2g 2.0.12 fips 2048",
+        "Library OpenSSL 1.0.2g 2.0.12 fips 512",
+        "Library OpenSSL 0.9.7 1024",
+        "Library OpenSSL 0.9.7 2048",
+        "Library OpenSSL 0.9.7 512",
+        "Library OpenSSL 1.0.2k 2.0.14 fips 1024",
+        "Library OpenSSL 1.0.2k 2.0.14 fips 2048",
+        "Library OpenSSL 1.0.2k 2.0.14 fips 512",
+        "Library OpenSSL 1.1.0e 1024",
+        "Library OpenSSL 1.1.0e 2048",
+        "Library OpenSSL 1.1.0e 512",
+        "Library OpenSSL 1.0.2g 1024",
+        "Library OpenSSL 1.0.2g 2048",
+        "Library OpenSSL 1.0.2g 512"
+    ],
+    "25": [
+        "Library OpenSSL 1.0.2g 8-bit 1024",
+        "Library OpenSSL 1.0.2g 8-bit 2048",
+        "Library OpenSSL 1.0.2g 8-bit 512"
+    ],
+    "14": [
+        "Library Crypto++ 5.6.3 1024",
+        "Library Crypto++ 5.6.3 2048",
+        "Library Crypto++ 5.6.3 512",
+        "Library Crypto++ 5.6.5 1024",
+        "Library Crypto++ 5.6.5 2048",
+        "Library Crypto++ 5.6.5 512",
+        "Library Crypto++ 5.6.0 1024",
+        "Library Crypto++ 5.6.0 2048",
+        "Library Crypto++ 5.6.0 512",
+        "Library Microsoft CryptoAPI 1024",
+        "Library Microsoft CryptoAPI 2048",
+        "Library Microsoft CryptoAPI 512",
+        "Library Microsoft .NET 1024",
+        "Library Microsoft .NET 2048",
+        "Library Microsoft .NET 512",
+        "Library Microsoft CNG 1024",
+        "Library Microsoft CNG 2048",
+        "Library Microsoft CNG 512"
+    ],
+    "4": [
+        "Library PGP SDK 4 FIPS 1024",
+        "Library PGP SDK 4 FIPS 2048",
+        "Library PGP SDK 4 FIPS 512"
+    ],
+    "6": [
+        "Library PGP SDK 4 1024",
+        "Library PGP SDK 4 2048",
+        "Library PGP SDK 4 512"
+    ],
+    "9": [
+        "Library Bouncy Castle 1.53 1024",
+        "Library Bouncy Castle 1.53 2048",
+        "Library Bouncy Castle 1.53 512",
+        "Library SunRsaSign OpenJDK 1.8 1024",
+        "Library SunRsaSign OpenJDK 1.8 2048",
+        "Library SunRsaSign OpenJDK 1.8 512"
+    ],
+    "7": [
+        "Library Libgcrypt 1.6.5 FIPS 1024",
+        "Library Libgcrypt 1.6.5 FIPS 2048",
+        "Library Libgcrypt 1.6.5 FIPS 512",
+        "Library Libgcrypt 1.6.5 urandom FIPS 1024",
+        "Library Libgcrypt 1.6.5 urandom FIPS 2048",
+        "Library Libgcrypt 1.7.6 1024",
+        "Library Libgcrypt 1.7.6 2048",
+        "Library Libgcrypt 1.7.6 512",
+        "Library Libgcrypt 1.6.5 1024",
+        "Library Libgcrypt 1.6.5 2048",
+        "Library Libgcrypt 1.6.5 512",
+        "Library Libgcrypt 1.6.0 FIPS 1024",
+        "Library Libgcrypt 1.6.0 FIPS 2048",
+        "Library Libgcrypt 1.6.0 urandom FIPS 1024",
+        "Library Libgcrypt 1.6.0 urandom FIPS 2048",
+        "Library Libgcrypt 1.6.5 urandom 1024",
+        "Library Libgcrypt 1.6.5 urandom 2048",
+        "Library Libgcrypt 1.6.5 urandom 512",
+        "Library Libgcrypt 1.6.0 urandom 1024",
+        "Library Libgcrypt 1.7.6 urandom 1024",
+        "Library Libgcrypt 1.7.6 urandom 2048",
+        "Library Libgcrypt 1.7.6 urandom 512",
+        "Library Libgcrypt 1.6.0 1024"
+    ],
+    "18": [
+        "Library Sage Blum 512",
+        "Library Sage Provable 512"
+    ]
+}

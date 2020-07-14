@@ -1,0 +1,7 @@
+{\pgfplotstabletypeset[%
+                every head row/.style={after row= \hline},
+                /pgf/number format/fixed,
+                /pgf/number format/precision=1,
+                col sep=comma,
+                every last row/.style={before row=\hline \rowstyle{\bfseries}},
+                columns/batch_keys/.style={column name={\#keys in batch}, reset styles,string type,},]

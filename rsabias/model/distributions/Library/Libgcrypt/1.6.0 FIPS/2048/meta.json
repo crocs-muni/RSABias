@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": true,
+        "format": "json",
+        "header": null,
+        "name": "Libgcrypt",
+        "public_only": false,
+        "separator": null,
+        "version": "1.6.0"
+    },
+    "files": [
+        {
+            "name": "aced3bedfd633650.json.gz",
+            "records": 100000,
+            "sha256": "aced3bedfd6336509e450d8d845332bf843a0bc92e6e7abab31b98c4ad79df25"
+        }
+    ],
+    "type": "reference"
+}

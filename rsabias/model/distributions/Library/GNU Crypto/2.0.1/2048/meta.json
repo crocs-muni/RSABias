@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "GNU Crypto",
+        "public_only": false,
+        "separator": null,
+        "version": "2.0.1"
+    },
+    "files": [
+        {
+            "name": "47a3cb7abf49e80b.json.gz",
+            "records": 122000,
+            "sha256": "47a3cb7abf49e80b60fc0e2a84b50d4ba414dc6a7cd81257ed15d33f68b48d28"
+        }
+    ],
+    "type": "reference"
+}

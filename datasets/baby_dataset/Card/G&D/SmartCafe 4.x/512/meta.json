@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "G&D",
+        "public_only": false,
+        "separator": null,
+        "version": "SmartCafe 4.x"
+    },
+    "files": [
+        {
+            "name": "cc8cc716b9d055ac.json.gz",
+            "records": 10,
+            "sha256": "cc8cc716b9d055ac6fc79b58bd215bbaab846ee49e90ca6274adfca2e5032e41"
+        }
+    ],
+    "type": "reference"
+}

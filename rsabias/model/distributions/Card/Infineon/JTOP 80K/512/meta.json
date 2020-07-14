@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Infineon",
+        "public_only": false,
+        "separator": null,
+        "version": "JTOP 80K"
+    },
+    "files": [
+        {
+            "name": "16f76da3749ad8fa.json.gz",
+            "records": 2990000,
+            "sha256": "16f76da3749ad8fac6e49c7a6b1e65340b6c4503ca7adce00c40835cfad16115"
+        }
+    ],
+    "type": "reference"
+}

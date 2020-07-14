@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "cryptlib",
+        "public_only": false,
+        "separator": null,
+        "version": "3.4.3.1"
+    },
+    "files": [
+        {
+            "name": "ad8b55d5b97230dc.json.gz",
+            "records": 86306,
+            "sha256": "ad8b55d5b97230dc1f62fbc716d3a5121c1d37544cb355b6adf26d4511a4e53a"
+        }
+    ],
+    "type": "reference"
+}

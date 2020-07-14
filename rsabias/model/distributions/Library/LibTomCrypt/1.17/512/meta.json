@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "LibTomCrypt",
+        "public_only": false,
+        "separator": null,
+        "version": "1.17"
+    },
+    "files": [
+        {
+            "name": "4707e1acfc98ce15.json.gz",
+            "records": 1090000,
+            "sha256": "4707e1acfc98ce152c4aecee2bb4cbd6f22bbc448dfc74bd46b4d50a734a51bf"
+        }
+    ],
+    "type": "reference"
+}

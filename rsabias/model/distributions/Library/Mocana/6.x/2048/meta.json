@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Mocana",
+        "public_only": false,
+        "separator": null,
+        "version": "6.x"
+    },
+    "files": [
+        {
+            "name": "9a9bc9dd862b3692.json.gz",
+            "records": 990000,
+            "sha256": "9a9bc9dd862b3692ed80d06252a19457c8201839118e10e6de6252e04d6161e7"
+        }
+    ],
+    "type": "reference"
+}

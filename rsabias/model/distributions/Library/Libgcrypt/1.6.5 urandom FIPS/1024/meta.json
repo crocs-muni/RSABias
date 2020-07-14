@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": true,
+        "format": "json",
+        "header": null,
+        "name": "Libgcrypt",
+        "public_only": false,
+        "separator": null,
+        "version": "1.6.5 urandom"
+    },
+    "files": [
+        {
+            "name": "3459b836b4b1158f.json.gz",
+            "records": 1090000,
+            "sha256": "3459b836b4b1158fd54465b5d7c01c7a4f4b8314f1fc6ed4ff0721f7f9e170f2"
+        }
+    ],
+    "type": "reference"
+}

@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": true,
+        "format": "json",
+        "header": null,
+        "name": "OpenSSL",
+        "public_only": false,
+        "separator": null,
+        "version": "2.0.12"
+    },
+    "files": [
+        {
+            "name": "20221e20a315fa97.json.gz",
+            "records": 1090000,
+            "sha256": "20221e20a315fa974ce5aa95e5dd6898aa01a701880c8a795cd41b7e37c6b1b6"
+        }
+    ],
+    "type": "reference"
+}

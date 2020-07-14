@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Crypto++",
+        "public_only": false,
+        "separator": null,
+        "version": "5.6.3"
+    },
+    "files": [
+        {
+            "name": "c190620e3e05f256.json.gz",
+            "records": 2190000,
+            "sha256": "c190620e3e05f2569d7bbdec457f651b7332a165fd4dc19d67baaf1910b24d51"
+        }
+    ],
+    "type": "reference"
+}

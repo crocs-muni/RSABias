@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Bouncy Castle",
+        "public_only": false,
+        "separator": null,
+        "version": "1.53"
+    },
+    "files": [
+        {
+            "name": "0c0bd40ab0f2e6c7.json.gz",
+            "records": 100000,
+            "sha256": "0c0bd40ab0f2e6c7a2845af801abad1f6b82aeeed7ce39baacac61f2648fbf33"
+        }
+    ],
+    "type": "reference"
+}

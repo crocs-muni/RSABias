@@ -1,0 +1,19 @@
+{
+    "type": "multi_dim_distribution",
+    "name": "Combine([MostSignificantBits({p},5,0,True),MostSignificantBits({q},5,0,True),All([Equal([LeastSignificantBits({p},1,1),Constant(1)]),Equal([LeastSignificantBits({q},1,1),Constant(1)])]),Min([ModularFingerprintSpecial({p}),ModularFingerprintSpecial({q})]),ROCAFingerprint({n},True)])",
+    "counts": {
+        "(30, 19, True, 5, False)": 41619,
+        "(30, 18, True, 5, False)": 41604,
+        "(31, 18, True, 5, False)": 41484,
+        "(31, 19, True, 5, False)": 41920,
+        "(30, 18, True, 17863, False)": 1924,
+        "(31, 18, True, 251, False)": 3830,
+        "(31, 18, True, 17863, False)": 1942,
+        "(31, 19, True, 251, False)": 3930,
+        "(30, 19, True, 17863, False)": 1890,
+        "(30, 19, True, 251, False)": 3956,
+        "(30, 18, True, 251, False)": 3988,
+        "(31, 19, True, 17863, False)": 1913
+    },
+    "eval": "all"
+}

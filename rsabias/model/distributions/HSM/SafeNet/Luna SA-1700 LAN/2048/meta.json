@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 2048,
+        "category": "HSM",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "SafeNet",
+        "public_only": false,
+        "separator": null,
+        "version": "Luna SA-1700 LAN"
+    },
+    "files": [
+        {
+            "name": "0b5f0b447a68cfe8.json.gz",
+            "records": 1070001,
+            "sha256": "0b5f0b447a68cfe8da829418b7ee2b2a51234a665dd682d5b65cc64df654c676"
+        }
+    ],
+    "type": "reference"
+}

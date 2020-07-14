@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Sage",
+        "public_only": false,
+        "separator": null,
+        "version": "Blum"
+    },
+    "files": [
+        {
+            "name": "701da61f9091c276.json.gz",
+            "records": 989997,
+            "sha256": "701da61f9091c2764ecdb609927e8ec7e924e82a7655d4f7c733e959fddc3a95"
+        }
+    ],
+    "type": "reference"
+}

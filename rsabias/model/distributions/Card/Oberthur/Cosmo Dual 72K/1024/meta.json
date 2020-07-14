@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Oberthur",
+        "public_only": false,
+        "separator": null,
+        "version": "Cosmo Dual 72K"
+    },
+    "files": [
+        {
+            "name": "844ad3dd36190d29.json.gz",
+            "records": 140000,
+            "sha256": "844ad3dd36190d299649764578832b177c052b0c127ebc92fe6da2c77cfe7c53"
+        }
+    ],
+    "type": "reference"
+}

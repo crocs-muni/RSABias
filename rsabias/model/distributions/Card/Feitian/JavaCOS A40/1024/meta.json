@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Feitian",
+        "public_only": false,
+        "separator": null,
+        "version": "JavaCOS A40"
+    },
+    "files": [
+        {
+            "name": "62c3353f121331c0.json.gz",
+            "records": 88568,
+            "sha256": "62c3353f121331c077eeffb26b1fa28f12755691918d3d75e1df12986f6878da"
+        }
+    ],
+    "type": "reference"
+}

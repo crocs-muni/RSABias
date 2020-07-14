@@ -1,0 +1,32 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 16,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 0,
+        "category": "BatchGCD",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "group": null,
+        "header": null,
+        "name": "Rapid7",
+        "public_only": false,
+        "separator": null,
+        "version": "openssl"
+    },
+    "files": [
+        {
+            "name": "ea229f977fb51000.json.gz",
+            "records": 61174,
+            "sha256": "ea229f977fb510007cb14cff68444e4c097e9cd5c83434cf323f8bebe3d1e075"
+        }
+    ],
+    "type": "reference"
+}

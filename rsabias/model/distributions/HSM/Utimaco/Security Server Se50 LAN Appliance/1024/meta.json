@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "HSM",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Utimaco",
+        "public_only": false,
+        "separator": null,
+        "version": "Security Server Se50 LAN Appliance"
+    },
+    "files": [
+        {
+            "name": "8b79ea77471c0f73.json.gz",
+            "records": 990000,
+            "sha256": "8b79ea77471c0f73b604093e4d7fdaf564ac8000226a7beab115904bbc8e42bb"
+        }
+    ],
+    "type": "reference"
+}

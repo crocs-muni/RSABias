@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "G&D",
+        "public_only": false,
+        "separator": null,
+        "version": "StarSign"
+    },
+    "files": [
+        {
+            "name": "5f6ff872cf7c9f7c.json.gz",
+            "records": 1043456,
+            "sha256": "5f6ff872cf7c9f7c8980201ca1ebfa2465e23160bc68f2bf4489a4414c6219ac"
+        }
+    ],
+    "type": "reference"
+}

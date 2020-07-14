@@ -1,0 +1,37 @@
+{
+  "transformation": "Combine",
+  "options": {
+    "input": [
+      {
+        "transformation": "MostSignificantBits",
+        "options": {
+          "input": "{p}",
+          "skip": 0,
+          "count": 5,
+          "byte_aligned": true
+        }
+      },
+      {
+        "transformation": "LeastSignificantBits",
+        "options": {
+          "input": "{p}",
+          "skip": 1,
+          "count": 1
+        }
+      },
+      {
+        "transformation": "ModularFingerprintSpecial",
+        "options": {
+          "input": "{p}"
+        }
+      },
+      {
+        "transformation": "ROCAFingerprint",
+        "options": {
+          "input": "{p}",
+          "roca_modulus": false
+        }
+      }
+    ]
+  }
+}

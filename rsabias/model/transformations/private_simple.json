@@ -1,0 +1,137 @@
+{
+  "transformation": "Combine",
+  "options": {
+    "input": [
+      {
+        "transformation": "MostSignificantBits",
+        "options": {
+          "input": "{p}",
+          "skip": 0,
+          "count": 5,
+          "byte_aligned": true
+        }
+      },
+      {
+        "transformation": "MostSignificantBits",
+        "options": {
+          "input": "{q}",
+          "skip": 0,
+          "count": 5,
+          "byte_aligned": true
+        }
+      },
+      {
+        "transformation": "All",
+        "options": {
+          "input": [
+            {
+              "transformation": "Equal",
+              "options": {
+                "input": [
+                  {
+                    "transformation": "LeastSignificantBits",
+                    "options": {
+                      "input": "{p}",
+                      "skip": 1,
+                      "count": 1
+                    }
+                  },
+                  {
+                    "transformation": "Constant",
+                    "options": {
+                      "value": 1
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "transformation": "Equal",
+              "options": {
+                "input": [
+                  {
+                    "transformation": "LeastSignificantBits",
+                    "options": {
+                      "input": "{q}",
+                      "skip": 1,
+                      "count": 1
+                    }
+                  },
+                  {
+                    "transformation": "Constant",
+                    "options": {
+                      "value": 1
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "transformation": "All",
+        "options": {
+          "input": [
+            {
+              "transformation": "ModularFingerprint",
+              "options": {
+                "input": "{p}",
+                "value": 5
+              }
+            },
+            {
+              "transformation": "ModularFingerprint",
+              "options": {
+                "input": "{q}",
+                "value": 5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "transformation": "All",
+        "options": {
+          "input": [
+            {
+              "transformation": "ModularFingerprint",
+              "options": {
+                "input": "{p}",
+                "value": 251
+              }
+            },
+            {
+              "transformation": "ModularFingerprint",
+              "options": {
+                "input": "{q}",
+                "value": 251
+              }
+            }
+          ]
+        }
+      },
+      {
+        "transformation": "All",
+        "options": {
+          "input": [
+            {
+              "transformation": "ModularFingerprint",
+              "options": {
+                "input": "{p}",
+                "value": 17863
+              }
+            },
+            {
+              "transformation": "ModularFingerprint",
+              "options": {
+                "input": "{q}",
+                "value": 17863
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

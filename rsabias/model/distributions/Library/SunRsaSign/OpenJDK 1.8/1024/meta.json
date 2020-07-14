@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 1024,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "SunRsaSign",
+        "public_only": false,
+        "separator": null,
+        "version": "OpenJDK 1.8"
+    },
+    "files": [
+        {
+            "name": "b90a6c650d8dc904.json.gz",
+            "records": 1090000,
+            "sha256": "b90a6c650d8dc904727972bfafe927bb943dad6d492ee5139705e064e4454ceb"
+        }
+    ],
+    "type": "reference"
+}

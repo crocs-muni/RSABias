@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Card",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Taisys",
+        "public_only": false,
+        "separator": null,
+        "version": "SIMoME VAULT"
+    },
+    "files": [
+        {
+            "name": "a0377538015ceb91.json.gz",
+            "records": 140177,
+            "sha256": "a0377538015ceb91ff3746883fecec3e07058c8d688bdddfef5c2d68c30f3948"
+        }
+    ],
+    "type": "reference"
+}

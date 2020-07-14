@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Botan",
+        "public_only": false,
+        "separator": null,
+        "version": "2.1.0"
+    },
+    "files": [
+        {
+            "name": "b1982d9f30e4813e.json.gz",
+            "records": 1090000,
+            "sha256": "b1982d9f30e4813e3aa37cadf7210260855e44d55c0a5a2d0674f6da2e99cd2b"
+        }
+    ],
+    "type": "reference"
+}

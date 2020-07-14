@@ -1,0 +1,31 @@
+{
+    "details": {
+        "base_dict": {
+            "d": 16,
+            "e": 16,
+            "id": 10,
+            "n": 16,
+            "p": 16,
+            "q": 16,
+            "t": 10
+        },
+        "bitlen": 512,
+        "category": "Library",
+        "compressed": true,
+        "fips_mode": false,
+        "format": "json",
+        "header": null,
+        "name": "Sage",
+        "public_only": false,
+        "separator": null,
+        "version": "Default"
+    },
+    "files": [
+        {
+            "name": "973536335d4b4062.json.gz",
+            "records": 1990000,
+            "sha256": "973536335d4b4062df99c142d462bf89e39bd51c0fab20eac477814401ba0529"
+        }
+    ],
+    "type": "reference"
+}
