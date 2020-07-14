@@ -2,7 +2,7 @@
 
 This folder contains a baby dataset that can be used to experiment with our tool. The dataset contains 70 distinct RSA keys of bitlength 512 gathered from 7 different smart card models. 
 
-Such dataset is technically loaded by the [dataset class](https://github.com/matusn/RSABias/blob/master/rsabias/dataset.py). The keys can be distributed across multiple folders, and can be optionally compressed. Each record in the dataset -- a list of keys originating from the same source -- is represented by a `meta.json` file. Example of such file is presented below, together with comments of various properties:
+Such dataset is technically loaded by the [dataset class](https://github.com/crocs-muni/RSABias/blob/master/rsabias/core/dataset.py). The keys can be distributed across multiple folders, and can be optionally compressed. Each record in the dataset -- a list of keys originating from the same source -- is represented by a `meta.json` file. Example of such file is presented below, together with comments of various properties:
 
 ### meta.json example
 
