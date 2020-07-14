@@ -67,7 +67,7 @@ def classify_key(input_path, output_path):
     recall = prec_recall[group_ordering[0]]['Recall']
     print(f'\t- If a key is marked as coming from Group {group_ordering[0]}, the model is in {100*precision:.2f}% cases right.')
     print(f'\t- The model correctly classifies {100*recall:.2f}% keys that are actually from Group {group_ordering[0]}.')
-    print(f'\t- This group contains the following sources:')
+    print(f'\t- This group contains the following sources (and your key therefore probably originates from):')
     for src in groups_data[group_ordering[0]]:
         print(f'\t\t* {src}')
     print(f'\t- The full report of the key classification can be found at: {report_path}')
