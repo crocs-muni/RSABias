@@ -44,7 +44,6 @@ class Table:
         if len(names) != 1 or len(classes) != 1:
             raise TableException('Cannot group different distributions')
         name = names.pop()
-        # TODO: Adam, we may not have the exactly same transformations, but rather a subset of those. Too strict cond.
         if name != trans.name():
             raise TableException('Transformations not matching "{}" and "{}"'
                                  .format(name, trans.name()))

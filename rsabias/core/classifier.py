@@ -266,7 +266,8 @@ class Evaluator:
             self.frenquencies[best_guess] += 1
 
     def init_batch_dictionary(self):
-        lines = [line.rstrip('\n') for line in open('/Users/adam/phd/projects/rsa/datasets/batch_gcd/rapid7/other/08230494f25e7f.json', 'r')]
+        # fill-in path to datasets/batch_gcd/rapid7/other/08230494f25e7f.json
+        lines = [line.rstrip('\n') for line in open('see/comment/above', 'r')]
         for l in lines:
             json_data = json.loads(l)
             self.batch_frequencies[json_data['batch']] = np.ones(self.proba_table.n_groups)
