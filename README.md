@@ -1,5 +1,3 @@
-PUT TO CROCS
-
 # Biased RSA private keys: Origin attribution of GCD-factorable keys
 
 Python tool for black-box analysis of RSA key generation in cryptographic libraries and RSA key classification. This tool accompanies the paper [Biased RSA private keys: Origin attribution of GCD-factorable keys](TBA) presented at [ESORICS 2020](https://www.surrey.ac.uk/esorics-2020) conference. 
