@@ -2,14 +2,14 @@
 
 Python tool for black-box analysis of RSA key generation in cryptographic libraries and RSA key classification. This tool accompanies the paper [Biased RSA private keys: Origin attribution of GCD-factorable keys](TBA) presented at [ESORICS 2020](https://www.surrey.ac.uk/esorics-2020) conference. 
 
-Using this project, you can audit the origin of your RSA keypair. Also, it is possible to replicate our work and analyze large datasets of keys. Beware that when classifying one key, the process is not bulletproof, as our model achieves 47.7% accuracy (on 26 classes). 
+Using this project, you can audit the origin of your RSA private key. Also, it is possible to replicate our work and analyze large datasets of keys. Beware that when classifying one key, the process is not bulletproof, as our model achieves 47.7% accuracy (on 26 classes) on average. 
 
 ## Install
 
-The code is tested on Python 3.6. It should suffice to clone and install using the setup script. Note that since the stable part of the code is tied to the experimental part, this package is not distributed as a pip package. Note that the required gmpy2 package has some [install requirements](https://gmpy2.readthedocs.io/en/latest/intro.html#installation). The full chain of commands is:
+The code is tested on Python 3.6. It should suffice to clone and install using the setup script. Note that since the stable part of the code is tied to the experimental part, this package is not distributed as a pip package. Also, note that the required gmpy2 package has some [install requirements](https://gmpy2.readthedocs.io/en/latest/intro.html#installation). The full chain of commands is:
 
 ```
-git clone git@github.com:matusn/RSABias.git &&
+git clone git@github.com:crocs-muni/RSABias.git &&
 cd RSABias &&
 python3 -m venv venv &&
 source venv/bin/activate &&
@@ -20,7 +20,7 @@ python3 ./setup.py install
 
 ### Classification of a single key
 
-From the repository root, you can try to classify the sample key as:
+From the repository root, you can try to classify [the example key](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/sample_private_key.pem) as:
 
 ```bash
 rsabias -a classify -i rsabias/model/sample_private_key.pem -o .
@@ -63,7 +63,7 @@ A bunch of distinct tasks is available for full analysis of the RSA keys. This s
 - `dist+plot` - Computes the exact distribution of the selected features on a whole dataset. Out of these features, labels for the dataset are constructed. This task also plots a dendrogram of the classes, showing how similar/distant the keys from the respective sources are. 
 - `group` - Performs the clustering task, using the distributions of the features as an input. 
 - `split` - Splits the dataset into training and test part. Out of each source, at least 10 000 keys are taken into the test set as default.  
-- `filter` - Prepares the test dataset. This task shuffles and merges the keys into a single artificially created dataset, that can be fed into tasks below.
+- `filter` - Prepares the test dataset. This task shuffles and merges the keys into a single artificially created dataset, that can be fed into the tasks below.
 - `build` - Based on a list of transformations, groups obtained from clustering, and a dataset, this task constructs the classification tables. Three Bayes classifiers can be selected: naive, complex, and cross-feature classifier. See Section 3 of the paper for more information. 
 - `evaluate` - Evaluates the classifier on a dataset of keys. Produces several json files with the model performance report (if the labels are available). 
 - `batch_gcd` - Builds specific classification tables for the GCD-factorable dataset (that only uses a single prime) and directly uses them to classify the whole dataset. 
@@ -97,7 +97,7 @@ To summarize, in order to fully replicate our experiments, one must do:
 1. Download our datasets (see below).
 2. Use our [feature vector](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model#5p_5q_blum_mod_rocajson) to count the distribution of the features on the whole dataset. (`dist+plot` task). The output of this task can be found at [model/distributions](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model/transformations) folder.
 3. Split the key sources into multiple groups with the help of automated clustering. (`group` task). The output of this task can be found at [model/groups](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model/groups) folder.
-4. Split and filter the dataset into training and test part (`split` and `filter` tasks)
+4. Split and filter the dataset into training and test part. (`split` and `filter` tasks)
 5. Build the model. (`build` task)
 6. Evaluate the performance of the model. (`evaluate` task)
 7. Possibly classify the [batch-gcd dataset](https://github.com/crocs-muni/RSABias/tree/master/datasets/BatchGCD-primes-only). (`batch-gcd` task)
