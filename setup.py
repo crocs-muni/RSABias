@@ -16,7 +16,7 @@ setup(
     long_description=readme,
     author='Matus Nemec',
     author_email='mnemec@mail.muni.cz',
-    url='https://github.com/matusn/RSABias',
+    url='https://github.com/crocs-muni/RSABias',
     license=license,
     packages=find_packages(),
     entry_points={
