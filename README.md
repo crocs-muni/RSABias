@@ -1,6 +1,8 @@
+PUT TO CROCS
+
 # Biased RSA private keys: Origin attribution of GCD-factorable keys
 
-Python tool for black-box analysis of RSA key generation in cryptographic libraries and for RSA key classification. This tool accompanies the paper [Biased RSA private keys: Origin attribution of GCD-factorable keys](TBA) presented at [ESORICS 2020](https://www.surrey.ac.uk/esorics-2020) conference. 
+Python tool for black-box analysis of RSA key generation in cryptographic libraries and RSA key classification. This tool accompanies the paper [Biased RSA private keys: Origin attribution of GCD-factorable keys](TBA) presented at [ESORICS 2020](https://www.surrey.ac.uk/esorics-2020) conference. 
 
 Using this project, you can audit the origin of your RSA keypair. Also, it is possible to replicate our work and analyze large datasets of keys. Beware that when classifying one key, the process is not bulletproof, as our model achieves 47.7% accuracy (on 26 classes). 
 
@@ -57,20 +59,20 @@ The full report at `./key_classification.json` then contains similar information
 
 ### Advanced usage
 
-A bunch of distinct tasks are available for full analysis of the RSA keys. This section of the readme is not meant to be self-contained, but rather provide a guidance. The user will most probably need to dive into the code when aiming for replication of the experiment. A list of available tasks with short description follows (with the assumption that the user is aknowledged with out paper). The exact list of expected parameters for each of the tasks can be simply read out from the [__main__.py](TBA). The tasks are presented in the order that leads to experiment replication.
+A bunch of distinct tasks is available for full analysis of the RSA keys. This section of the readme is not meant to be self-contained, but rather provide guidance. The user will most probably need to dive into the code when aiming for the replication of the experiment. A list of available tasks with short description follows (with the assumption that the user is acknowledged with our paper). The exact list of expected parameters for each of the tasks can be simply read out from the [cli.py](https://github.com/crocs-muni/RSABias/blob/master/rsabias/cli.py). The tasks are presented in the order that leads to experiment replication.
 
 - `convert` -  Since we internally support multiple formats of the datasets, this task is capable of converting between the formats (csv -> json, enabling compression, etc.)
 - `dist+plot` - Computes the exact distribution of the selected features on a whole dataset. Out of these features, labels for the dataset are constructed. This task also plots a dendrogram of the classes, showing how similar/distant the keys from the respective sources are. 
 - `group` - Performs the clustering task, using the distributions of the features as an input. 
 - `split` - Splits the dataset into training and test part. Out of each source, at least 10 000 keys are taken into the test set as default.  
-- `filter` - Prepares the test dataset. This task shuffles and merges the keys into a single artifically created dataset, that can be fed into tasks below.
-- `build` - Based on a list of transformations, groups obtained from clustering, and a dataset, this task constructs the classification tables. Three Bayes classifiers can be selected: naive, complex, and cross-feature classifier. See Section 3 of paper for more information. 
-- `evaluate` - Evaluates the classifier on a dataset of keys. Produces several json files with the model perormance report (if the labels are available). 
-- `batch_gcd` - Builds specific classification tables for the GCD-factorable dataset (that only use single prime) and directly uses them to classify the whole dataset. 
-- `visualize` - To-be-called after the `evaluate` task. Takes the model performance results and prints them into a table. More info at [classification_table_template](https://github.com/matusn/RSABias/tree/master/classification_table_template).
-- `classify` - Used to classify a single key. This is a main task that was already described above. 
+- `filter` - Prepares the test dataset. This task shuffles and merges the keys into a single artificially created dataset, that can be fed into tasks below.
+- `build` - Based on a list of transformations, groups obtained from clustering, and a dataset, this task constructs the classification tables. Three Bayes classifiers can be selected: naive, complex, and cross-feature classifier. See Section 3 of the paper for more information. 
+- `evaluate` - Evaluates the classifier on a dataset of keys. Produces several json files with the model performance report (if the labels are available). 
+- `batch_gcd` - Builds specific classification tables for the GCD-factorable dataset (that only uses a single prime) and directly uses them to classify the whole dataset. 
+- `visualize` - To-be-called after the `evaluate` task. Takes the model performance results and prints them into a table. More info at [classification_table_template](https://github.com/crocs-muni/RSABias/tree/master/rsabias/classification_table_template).
+- `classify` - Used to classify a single key. This is the main task that was already described above. 
 
-Each of the task can be invoked by calling
+Each of the tasks can be invoked by calling
 
 ```bash
 rsabias -a task_name task_arguments
@@ -79,11 +81,11 @@ rsabias -a task_name task_arguments
 The parameters of the tasks are:
 
 - `-a` or `--action`: which action to perform, see above.
-- `-t` or `--trans`: path to the file with transformations, see [model](TBA#transformations) for more information.
+- `-t` or `--trans`: path to the file with transformations, see [model](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model#transformations-description) for more information.
 - `-i` or `--inp`: path to the input, whatever the task needs.
 - `-o` or `--out`: path to the output, whatever the task produces.
 - `-f` or `--format`: format of the dataset (csv, json). 
-- `-g` or `--groups`: path to the file with groups, see [model](TBA#groups) for more information.
+- `-g` or `--groups`: path to the file with groups, see [model](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model#groups-description) for more information.
 - `-d` or `--decompress`: whether to compress the dataset or not.
 - `-s` or `--subspaces`: Subspaces for the clustering task.
 - `-c` or `--classtable`: path to the classification table.
@@ -95,15 +97,15 @@ The parameters of the tasks are:
 To summarize, in order to fully replicate our experiments, one must do:
 
 1. Download our datasets (see below).
-2. Use our [feature vector](TBA) to count distribution of the features on the whole dataset. (`dist+plot` task). The output of this task can be found at [model/distributions](TBA) folder.
-3. Split the key sources into multiple groups with the help of automated clustering. (`group` task). The output of this task can be found at [model/groups](TBA) folder.
+2. Use our [feature vector](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model#5p_5q_blum_mod_rocajson) to count the distribution of the features on the whole dataset. (`dist+plot` task). The output of this task can be found at [model/distributions](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model/transformations) folder.
+3. Split the key sources into multiple groups with the help of automated clustering. (`group` task). The output of this task can be found at [model/groups](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model/groups) folder.
 4. Split and filter the dataset into training and test part (`split` and `filter` tasks)
 5. Build the model. (`build` task)
 6. Evaluate the performance of the model. (`evaluate` task)
-7. Possibly classify the [batch-gcd dataset](TBA). (`batch-gcd` task)
+7. Possibly classify the [batch-gcd dataset](https://github.com/crocs-muni/RSABias/tree/master/datasets/BatchGCD-primes-only). (`batch-gcd` task)
 8. Possibly visualize the model performance. (`visualize` task)
 
-We present further description of the utilized data structures (groups, features, ...) in the [model folder](https://github.com/matusn/RSABias/tree/master/model).
+We present a further description of the utilized data structures (groups, features, ...) in the [model folder](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model).
 
 ## Dataset
 
@@ -111,31 +113,31 @@ We present further description of the utilized data structures (groups, features
 
 We collected, analyzed, and published the largest dataset of RSA keys with a known origin from 70 libraries (43 open-source libraries, 5 black-box libraries, 3 HSMs, 19 smartcards). We both expanded the datasets from previous work and generated new keys from additional libraries for the sake of this study.
 
-We are primarily interested in 2048-bit keys, what is the most commonly used key length for RSA. As in previous studies, we also generate shorter keys (512 and 1024 bits) to speed up the process, while verifying that the chosen biased features are not influenced by the key size. This makes the keys of different sizes interchangeable for the sake of our study. We assume that repeatedly running the key generation locally approximates the distributed behaviour of many instances of the same library. 
+We are primarily interested in 2048-bit keys, which is the most commonly used key length for RSA. As in previous studies, we also generate shorter keys (512 and 1024 bits) to speed up the process, while verifying that the chosen biased features are not influenced by the key size. This makes the keys of different sizes interchangeable for the sake of our study. We assume that repeatedly running the key generation locally approximates the distributed behaviour of many instances of the same library. 
 
 The dataset of more than 160 million RSA keys can be accessed from [Google Drive](https://drive.google.com/drive/folders/0B0PpUrsKytcyMllkUHJ0RkZkdzA?usp=sharing).
 
 ### GCD-factorable keys
 
-We utilized the training data to classify a [Rapid-7](https://opendata.rapid7.com/sonar.ssl/) dataset of RSA keys factorable by batch-GCD method. More on this dataset in [BatchGCD-primes-only](https://github.com/matusn/RSABias/tree/master/BatchGCD-primes-only). Using this dataset, we classified more than 80 thousand of weak RSA keys. 
+We utilized the training data to classify a [Rapid-7](https://opendata.rapid7.com/sonar.ssl/) dataset of RSA keys factorable by a batch-GCD method. More on this dataset in [BatchGCD-primes-only](https://github.com/crocs-muni/RSABias/tree/master/datasets/BatchGCD-primes-only). Using this dataset, we classified more than 80 thousand weak RSA keys. 
 
 ## Paper abstract
 
-The paper can be found at: [arxiv.com/linkToPaper](TBA). 
+The paper can be found at [arxiv.com/linkToPaper](TBA). 
 
 In 2016, Švenda et al. (USENIX 2016, The Million-key Question) reported that the implementation choices in cryptographic libraries allow for qualified guessing about the origin of public RSA keys.
 We extend the technique to two new scenarios when not only public but also private keys are available for the origin attribution -- analysis of a source of GCD-factorable keys in IPv4-wide TLS scans and forensic investigation of an unknown source. We learn several representatives of the bias from the private keys to train a model on more than 150 million keys collected from 70 cryptographic libraries, hardware security modules and cryptographic smartcards. Our model not only doubles the number of distinguishable groups of libraries (compared to public keys from Švenda et al.) but also improves more than twice in accuracy w.r.t. random guessing when a single key is classified. For a forensic scenario where at least 10 keys from the same source are available, the correct origin library is correctly identified with average accuracy of 89\% compared to 4\% accuracy of a random guess. The technique was also used to identify libraries producing GCD-factorable TLS keys, showing that only three groups are the probable suspects.
 
 ## Project status & Contributing
 
-This project is a result of a contiuous efforts of the [CRoCS](crocs.fi.muni.cz) laboratory that resulted into following publications:
+This project is a result of a continuous effort of the [CRoCS](https://www.crocs.fi.muni.cz) laboratory that resulted into the following publications:
 
 - [The Million-Key Question – Investigating the Origins of RSA Public Keys](https://crocs.fi.muni.cz/public/papers/usenix2016) - USENIX 2016, Best Paper Award,
 - [The Return of Coppersmith's Attack: Practical Factorization of Widely Used RSA Moduli](https://crocs.fi.muni.cz/public/papers/rsa_ccs17) - ACM CCS 2017,
 - [Measuring Popularity of Cryptographic Libraries in Internet-Wide Scans](https://crocs.fi.muni.cz/public/papers/acsac2017) - ACSAC 2017,
 - [Biased RSA private keys: Origin attribution of GCD-factorable keys](https://crocs.fi.muni.cz/public/papers/privrsa_esorics20) - ESORICS 2020.
 
-If you would like to contribute, feel free to [Adam Janovsky](https://github.com/adamjanovsky) or open an issue.
+If you would like to contribute, feel free to contact [Adam Janovsky](https://github.com/adamjanovsky) or open an issue.
 
 ## Authors
 
@@ -143,4 +145,4 @@ If you would like to contribute, feel free to [Adam Janovsky](https://github.com
 
 ## License
 
-This tool is to be available under [MIT License](https://github.com/matusn/RSABias/blob/master/LICENSE).
+This tool is available under [MIT License](https://github.com/matusn/RSABias/blob/master/LICENSE).
