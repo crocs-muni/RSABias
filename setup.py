@@ -30,7 +30,7 @@ setup(
         'kiwisolver==1.2.0',
         'matplotlib==3.1.0',
         'mpmath==1.1.0',
-        'numpy==1.16.4',
+        'numpy==1.22.0',
         'pandas==0.24.2',
         'pycryptodome==3.9.8',
         'pyparsing==2.4.7',
