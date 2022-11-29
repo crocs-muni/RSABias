@@ -121,7 +121,7 @@ We utilized the training data to classify a [Rapid-7](https://opendata.rapid7.co
 
 ## Paper abstract
 
-The paper can be found at [arxiv.com/linkToPaper](https://arxiv.org/abs/2009.06700).
+The paper can be found at [arXiv](https://arxiv.org/abs/2009.06700).
 
 In 2016, Švenda et al. (USENIX 2016, The Million-key Question) reported that the implementation choices in cryptographic libraries allow for qualified guessing about the origin of public RSA keys.
 We extend the technique to two new scenarios when not only public but also private keys are available for the origin attribution -- analysis of a source of GCD-factorable keys in IPv4-wide TLS scans and forensic investigation of an unknown source. We learn several representatives of the bias from the private keys to train a model on more than 150 million keys collected from 70 cryptographic libraries, hardware security modules and cryptographic smartcards. Our model not only doubles the number of distinguishable groups of libraries (compared to public keys from Švenda et al.) but also improves more than twice in accuracy w.r.t. random guessing when a single key is classified. For a forensic scenario where at least 10 keys from the same source are available, the correct origin library is correctly identified with average accuracy of 89\% compared to 4\% accuracy of a random guess. The technique was also used to identify libraries producing GCD-factorable TLS keys, showing that only three groups are the probable suspects.
