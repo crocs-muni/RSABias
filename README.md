@@ -113,7 +113,7 @@ We collected, analyzed, and published the largest dataset of RSA keys with a kno
 
 We are primarily interested in 2048-bit keys, which is the most commonly used key length for RSA. As in previous studies, we also generate shorter keys (512 and 1024 bits) to speed up the process, while verifying that the chosen biased features are not influenced by the key size. This makes the keys of different sizes interchangeable for the sake of our study. We assume that repeatedly running the key generation locally approximates the distributed behaviour of many instances of the same library. 
 
-The dataset of more than 160 million RSA keys can be accessed from [Google Drive](https://drive.google.com/drive/folders/0B0PpUrsKytcyMllkUHJ0RkZkdzA?usp=sharing).
+The dataset of more than 160 million RSA keys can be accessed from [OwnCloud](https://owncloud.cesnet.cz/index.php/s/Ihhw3BKKzKTaxB9).
 
 ### GCD-factorable keys
 
