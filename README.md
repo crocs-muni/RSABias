@@ -1,8 +1,8 @@
 # Biased RSA private keys: Origin attribution of GCD-factorable keys
 
-Python tool for black-box analysis of RSA key generation in cryptographic libraries and RSA key classification. This tool accompanies the paper [Biased RSA private keys: Origin attribution of GCD-factorable keys](TBA) presented at [ESORICS 2020](https://www.surrey.ac.uk/esorics-2020) conference. 
+Python tool for black-box analysis of RSA key generation in cryptographic libraries and RSA key classification. This tool accompanies the paper [Biased RSA private keys: Origin attribution of GCD-factorable keys](TBA) presented at [ESORICS 2020](https://www.surrey.ac.uk/esorics-2020) conference.
 
-Using this project, you can audit the origin of your RSA private key. Also, it is possible to replicate our work and analyze large datasets of keys. Beware that when classifying one key, the process is not bulletproof, as our model achieves 47.7% accuracy (on 26 classes) on average. 
+Using this project, you can audit the origin of your RSA private key. Also, it is possible to replicate our work and analyze large datasets of keys. Beware that when classifying one key, the process is not bulletproof, as our model achieves 47.7% accuracy (on 26 classes) on average.
 
 ## Install
 
@@ -53,22 +53,22 @@ Your key with sha-256 digest: e10d8b68b1e2b595f69813a99524d9dce0c0f80b092f9466d8
 	- The full report of the key classification can be found at: ./key_classification.json
 ```
 
-The full report at `./key_classification.json` then contains similar information for all groups. At the bottom of the report, one can usually see so-called impossible groups. Such groups from our experience cannot generate the examined key. At the very top, the most probable groups are listed. 
+The full report at `./key_classification.json` then contains similar information for all groups. At the bottom of the report, one can usually see so-called impossible groups. Such groups from our experience cannot generate the examined key. At the very top, the most probable groups are listed.
 
 ### Advanced usage
 
 A bunch of distinct tasks is available for full analysis of the RSA keys. This section of the readme is not meant to be self-contained, but rather provide guidance. The user will most probably need to dive into the code when aiming for the replication of the experiment. A list of available tasks with short description follows (with the assumption that the user is acknowledged with our paper). The exact list of expected parameters for each of the tasks can be simply read out from the [cli.py](https://github.com/crocs-muni/RSABias/blob/master/rsabias/cli.py). The tasks are presented in the order that leads to experiment replication.
 
 - `convert` -  Since we internally support multiple formats of the datasets, this task is capable of converting between the formats (csv -> json, enabling compression, etc.)
-- `dist+plot` - Computes the exact distribution of the selected features on a whole dataset. Out of these features, labels for the dataset are constructed. This task also plots a dendrogram of the classes, showing how similar/distant the keys from the respective sources are. 
-- `group` - Performs the clustering task, using the distributions of the features as an input. 
-- `split` - Splits the dataset into training and test part. Out of each source, at least 10 000 keys are taken into the test set as default.  
+- `dist+plot` - Computes the exact distribution of the selected features on a whole dataset. Out of these features, labels for the dataset are constructed. This task also plots a dendrogram of the classes, showing how similar/distant the keys from the respective sources are.
+- `group` - Performs the clustering task, using the distributions of the features as an input.
+- `split` - Splits the dataset into training and test part. Out of each source, at least 10 000 keys are taken into the test set as default.
 - `filter` - Prepares the test dataset. This task shuffles and merges the keys into a single artificially created dataset, that can be fed into the tasks below.
-- `build` - Based on a list of transformations, groups obtained from clustering, and a dataset, this task constructs the classification tables. Three Bayes classifiers can be selected: naive, complex, and cross-feature classifier. See Section 3 of the paper for more information. 
-- `evaluate` - Evaluates the classifier on a dataset of keys. Produces several json files with the model performance report (if the labels are available). 
-- `batch_gcd` - Builds specific classification tables for the GCD-factorable dataset (that only uses a single prime) and directly uses them to classify the whole dataset. 
+- `build` - Based on a list of transformations, groups obtained from clustering, and a dataset, this task constructs the classification tables. Three Bayes classifiers can be selected: naive, complex, and cross-feature classifier. See Section 3 of the paper for more information.
+- `evaluate` - Evaluates the classifier on a dataset of keys. Produces several json files with the model performance report (if the labels are available).
+- `batch_gcd` - Builds specific classification tables for the GCD-factorable dataset (that only uses a single prime) and directly uses them to classify the whole dataset.
 - `visualize` - To-be-called after the `evaluate` task. Takes the model performance results and prints them into a table. More info at [classification_table_template](https://github.com/crocs-muni/RSABias/tree/master/rsabias/classification_table_template).
-- `classify` - Used to classify a single key. This is the main task that was already described above. 
+- `classify` - Used to classify a single key. This is the main task that was already described above.
 
 Each of the tasks can be invoked by calling
 
@@ -82,14 +82,14 @@ The parameters of the tasks are:
 - `-t` or `--trans`: path to the file with transformations, see [model](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model#transformations-description) for more information.
 - `-i` or `--inp`: path to the input, whatever the task needs.
 - `-o` or `--out`: path to the output, whatever the task produces.
-- `-f` or `--format`: format of the dataset (csv, json). 
+- `-f` or `--format`: format of the dataset (csv, json).
 - `-g` or `--groups`: path to the file with groups, see [model](https://github.com/crocs-muni/RSABias/tree/master/rsabias/model#groups-description) for more information.
 - `-d` or `--decompress`: whether to compress the dataset or not.
 - `-s` or `--subspaces`: Subspaces for the clustering task.
 - `-c` or `--classtable`: path to the classification table.
 - `-m` or `--method`: What model to use. naive bayess or complex Bayess.
 - `-l` or `--labels`: Whether the labels for the dataset are at hand, used for evaluation of the model performance.
-- `-p` or `--prime_wise`: Whether single-prime model should be used, for gcd-factorized key classification. 
+- `-p` or `--prime_wise`: Whether single-prime model should be used, for gcd-factorized key classification.
 - `-r` or `--remove_duplicities`: Whether duplicate keys should be deleted from a dataset.
 
 To summarize, in order to fully replicate our experiments, one must do:
@@ -111,17 +111,17 @@ We present a further description of the utilized data structures (groups, featur
 
 We collected, analyzed, and published the largest dataset of RSA keys with a known origin from 70 libraries (43 open-source libraries, 5 black-box libraries, 3 HSMs, 19 smartcards). We both expanded the datasets from previous work and generated new keys from additional libraries for the sake of this study.
 
-We are primarily interested in 2048-bit keys, which is the most commonly used key length for RSA. As in previous studies, we also generate shorter keys (512 and 1024 bits) to speed up the process, while verifying that the chosen biased features are not influenced by the key size. This makes the keys of different sizes interchangeable for the sake of our study. We assume that repeatedly running the key generation locally approximates the distributed behaviour of many instances of the same library. 
+We are primarily interested in 2048-bit keys, which is the most commonly used key length for RSA. As in previous studies, we also generate shorter keys (512 and 1024 bits) to speed up the process, while verifying that the chosen biased features are not influenced by the key size. This makes the keys of different sizes interchangeable for the sake of our study. We assume that repeatedly running the key generation locally approximates the distributed behaviour of many instances of the same library.
 
 The dataset of more than 160 million RSA keys can be accessed from [OwnCloud](https://owncloud.cesnet.cz/index.php/s/Ihhw3BKKzKTaxB9).
 
 ### GCD-factorable keys
 
-We utilized the training data to classify a [Rapid-7](https://opendata.rapid7.com/sonar.ssl/) dataset of RSA keys factorable by a batch-GCD method. More on this dataset in [BatchGCD-primes-only](https://github.com/crocs-muni/RSABias/tree/master/datasets/BatchGCD-primes-only). Using this dataset, we classified more than 80 thousand weak RSA keys. 
+We utilized the training data to classify a [Rapid-7](https://opendata.rapid7.com/sonar.ssl/) dataset of RSA keys factorable by a batch-GCD method. More on this dataset in [BatchGCD-primes-only](https://github.com/crocs-muni/RSABias/tree/master/datasets/BatchGCD-primes-only). Using this dataset, we classified more than 80 thousand weak RSA keys.
 
 ## Paper abstract
 
-The paper can be found at [arxiv.com/linkToPaper](TBA). 
+The paper can be found at [arxiv.com/linkToPaper](https://arxiv.org/abs/2009.06700).
 
 In 2016, Švenda et al. (USENIX 2016, The Million-key Question) reported that the implementation choices in cryptographic libraries allow for qualified guessing about the origin of public RSA keys.
 We extend the technique to two new scenarios when not only public but also private keys are available for the origin attribution -- analysis of a source of GCD-factorable keys in IPv4-wide TLS scans and forensic investigation of an unknown source. We learn several representatives of the bias from the private keys to train a model on more than 150 million keys collected from 70 cryptographic libraries, hardware security modules and cryptographic smartcards. Our model not only doubles the number of distinguishable groups of libraries (compared to public keys from Švenda et al.) but also improves more than twice in accuracy w.r.t. random guessing when a single key is classified. For a forensic scenario where at least 10 keys from the same source are available, the correct origin library is correctly identified with average accuracy of 89\% compared to 4\% accuracy of a random guess. The technique was also used to identify libraries producing GCD-factorable TLS keys, showing that only three groups are the probable suspects.
