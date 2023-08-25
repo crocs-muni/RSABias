@@ -60,7 +60,15 @@ class RSAFingerprintSet:
     avoid_factors_max = -1  # -1 if no avoidance of small factors in p-1/q-1, 5/251/17863 if no small factors below given limit are factors
 
     def __init__(self, pqn: list):
+        self.clear()
         self.pqn_list = pqn
+
+    def clear(self):
+        self.pqn_list = []
+        self.pqn_fingerprints = []
+        self.is_blum = True
+        self.at_least_one_roca_fingerprint = False
+        self.avoid_factors_max = -1
 
     def compute_fingerprint(self):
         never_below_17863 = True
