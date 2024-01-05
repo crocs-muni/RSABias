@@ -32,7 +32,7 @@ setup(
         'mpmath==1.1.0',
         'numpy==1.22.0',
         'pandas==0.24.2',
-        'pycryptodome==3.9.8',
+        'pycryptodome==3.19.1',
         'pyparsing==2.4.7',
         'python-dateutil==2.8.1',
         'pytz==2020.1',
