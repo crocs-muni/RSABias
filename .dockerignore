@@ -1,0 +1,10 @@
+.git
+**/__pycache__
+*.egg-info
+build
+dist
+venv
+.venv
+out
+Dockerfile
+.dockerignore
