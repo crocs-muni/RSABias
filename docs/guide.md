@@ -113,10 +113,18 @@ Do not classify OpenSSH-formatted keys directly: they are read with p and q swap
 
 ## 5. Walkthrough 2: which known source do my keys resemble?
 
-With several keys **from one source**, combine their results: the scores of each group are multiplied over all keys, as the model's own evaluation does. Classify each key into its own directory (every run overwrites `key_classification.json`), then summarise:
+With several keys **from one source**, combine their results: the scores of each group are multiplied over all keys, as the model's own evaluation does.
+
+Put copies of the keys into `work/mykeys`, one key per `.pem` file, in the format of walkthrough 1. To try it out first, generate test keys:
 
 ```bash
-# keys in work/mykeys/*.pem
+mkdir -p work/mykeys
+for i in $(seq 1 10); do openssl genrsa -out work/mykeys/key$i.pem 2048; done
+```
+
+Classify each key into its own directory (every run overwrites `key_classification.json`), then summarise:
+
+```bash
 for f in work/mykeys/*.pem; do
     n=$(basename "$f" .pem); mkdir -p "work/w2/$n"
     rsabias -a classify -i "$f" -o "work/w2/$n" > /dev/null
@@ -153,7 +161,7 @@ This is the main tool for comparing two sets of your keys (for example two versi
 
 `dist` searches its input directory for all `meta.json` files, so one input directory can hold several sources. Other key file formats (JSON lines, CSV) are described in [datasets/baby_dataset/readme.md](../datasets/baby_dataset/readme.md).
 
-`tools/pem2dataset.py` creates a dataset from PEM files. Arguments: output directory, source name, version, key files:
+`tools/pem2dataset.py` creates a dataset from PEM files. Arguments: output directory, source name, version, key files. The examples below take the keys of two versions of your library from `work/keys-v1` and `work/keys-v2`, one key per `.pem` file as in walkthrough 2:
 
 ```bash
 rsabias-tool pem2dataset work/datasets/v1/mylib-v1 MyLib 1.0 work/keys-v1/*.pem
