@@ -299,6 +299,9 @@ The walkthroughs above look at your keys: `classify` scores them against the mod
 
 | Problem | Cause and fix |
 |---|---|
+| `rsabias: command not found` or `rsabias-tool: command not found` | The functions of section 3 are defined only in the shell where you ran them. Define them again in every new terminal (or add them to `~/.bashrc`); for a local install, also activate the virtual environment again with `source venv/bin/activate` |
+| `argument -t/--trans: expected one argument` | `$TRANS` is not set in this shell: set it again (section 3) |
+| Syntax errors when defining the functions, e.g. in fish | The commands are for bash and zsh: start `bash` first |
 | `FileNotFoundError` at the end of `classify`, `evaluate` or `group` (`classify` prints its result first, then fails writing the report) | The output directory does not exist: `mkdir -p` it first |
 | `Permission denied` when writing outputs in Docker | The output directory was created by Docker as root. Remove it, create it yourself, and run with `--user "$(id -u):$(id -g)"` (the `rsabias` function above does) |
 | Docker cannot find a file | Paths must lie inside the directory you run from (it is mounted as `/work`); use relative paths |
