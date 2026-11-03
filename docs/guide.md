@@ -47,22 +47,37 @@ cd RSABias
 mkdir -p work        # keys and outputs go here; git ignores this directory
 ```
 
-**Docker (recommended).** Build the image once, then define a shell function so that the commands below work unchanged. The function mounts the repository root, so all paths must lie inside it (hence `work/`):
+The guide uses two commands:
+
+- `rsabias` runs the tool itself, e.g. `rsabias -a classify ...`.
+- `rsabias-tool <name>` runs one of the helper scripts in `tools/`, e.g. `rsabias-tool compare_dist ...` runs `tools/compare_dist.py`. The helpers are Python scripts that need the tool's dependencies.
+
+Set them up for Docker or for a local install. The definitions below are for bash and zsh.
+
+**Docker (recommended).** Build the image once and define both commands as shell functions. They mount the repository root, so all paths must lie inside it (hence `work/`). The helper scripts run inside the image, so nothing else needs to be installed:
 
 ```bash
 docker build -t rsabias .
 rsabias() { docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" rsabias "$@"; }
-rsabias-python() { docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" --entrypoint python rsabias "$@"; }
+rsabias-tool() { docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" --entrypoint python rsabias "tools/$1.py" "${@:2}"; }
 ```
 
-**Local install** (Python 3.11 or newer):
+**Local install** (Python 3.11 or newer). Installing the package provides `rsabias`; `rsabias-tool` runs the helpers with the Python of the virtual environment:
 
 ```bash
 python3 -m venv venv && source venv/bin/activate && pip install .
-alias rsabias-python=python
+rsabias-tool() { python "tools/$1.py" "${@:2}"; }
 ```
 
 Check the setup with `rsabias -h`.
+
+**Without the `rsabias-tool` function**, call the script directly. For example, `rsabias-tool compare_dist work/dist-v1 work/dist-v2` is
+
+```bash
+python tools/compare_dist.py work/dist-v1 work/dist-v2                     # local install
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" \
+    --entrypoint python rsabias tools/compare_dist.py work/dist-v1 work/dist-v2   # Docker
+```
 
 **Output directories must exist** before `classify`, `evaluate` and `group` run; only `dist` creates its own. Each walkthrough creates them with `mkdir -p`.
 
@@ -106,7 +121,7 @@ for f in work/mykeys/*.pem; do
     n=$(basename "$f" .pem); mkdir -p "work/w2/$n"
     rsabias -a classify -i "$f" -o "work/w2/$n" > /dev/null
 done
-rsabias-python tools/summarize_classification.py work/w2/*/key_classification.json
+rsabias-tool summarize_classification work/w2/*/key_classification.json
 ```
 
 The summary lists the top group of every key, how often each group came first, and the combined ranking with the sources of the top three groups. Groups that any key rules out are excluded.
@@ -141,8 +156,8 @@ This is the main tool for comparing two sets of your keys (for example two versi
 `tools/pem2dataset.py` creates a dataset from PEM files. Arguments: output directory, source name, version, key files:
 
 ```bash
-rsabias-python tools/pem2dataset.py work/datasets/v1/mylib-v1 MyLib 1.0 work/keys-v1/*.pem
-rsabias-python tools/pem2dataset.py work/datasets/v2/mylib-v2 MyLib 2.0 work/keys-v2/*.pem
+rsabias-tool pem2dataset work/datasets/v1/mylib-v1 MyLib 1.0 work/keys-v1/*.pem
+rsabias-tool pem2dataset work/datasets/v2/mylib-v2 MyLib 2.0 work/keys-v2/*.pem
 ```
 
 It skips files it cannot read and keys of a different length than the first, with a warning.
@@ -176,7 +191,7 @@ Each source gets a `dist.json` with the count of every combination of feature va
 ### Step 3: compare
 
 ```bash
-rsabias-python tools/compare_dist.py work/dist-v1 work/dist-v2
+rsabias-tool compare_dist work/dist-v1 work/dist-v2
 ```
 
 For each feature, it prints the share of every value in both sets, the difference in percentage points, and a chi-square test; then the total variation distance over all features together, the combinations that differ most, and combinations seen in only one set. An excerpt, comparing the model's 100,000 OpenSSL 1.1.0e keys with 1,000 OpenSSL 3.5.3 keys:
@@ -198,9 +213,9 @@ The distributions of all 184 sources (source, version and key length) the model 
 
 ```bash
 # against one known source
-rsabias-python tools/compare_dist.py rsabias/model/distributions/Library/OpenSSL/1.1.0e/2048/dist.json work/dist-v1
+rsabias-tool compare_dist rsabias/model/distributions/Library/OpenSSL/1.1.0e/2048/dist.json work/dist-v1
 # against all versions of a library
-rsabias-python tools/compare_dist.py rsabias/model/distributions/Library/OpenSSL work/dist-v1
+rsabias-tool compare_dist rsabias/model/distributions/Library/OpenSSL work/dist-v1
 ```
 
 To see which known sources are closest overall, cluster your distribution together with all of them. Your source either joins an existing group or forms its own:
