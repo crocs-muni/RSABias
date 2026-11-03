@@ -260,7 +260,18 @@ cp -r work/dist-v1/* work/cluster/in/
 rsabias -a group -i work/cluster/in -o work/cluster/out -t $TRANS > work/cluster/out/groups.txt
 ```
 
-`groups.txt` lists the resulting groups as JSON; find your source in it to see which known sources share its group. The dendrogram PDF in `work/cluster/out` shows how far each source is from the others.
+`groups.txt` lists the resulting groups as JSON: a group number, then the sources in the group. Each source is named `<category> <name> <version> <key length>` from its `meta.json`, so the keys packed in step 1 appear as `Library MyLib 1.0 2048` (`pem2dataset.py` sets the category to `Library` unless you pass `--category`). Find that name:
+
+```
+"13": [
+    "Library MyLib 1.0 2048"
+],
+```
+
+- **Alone in its group**, as above: your keys match no known source closely enough. Keys from OpenSSL 3 end up like this.
+- **Together with known sources**: your keys behave like those sources.
+
+The group numbers are assigned anew in every run and need not match the numbers in `rsabias/model/groups/groups.json` or in `classify` results: identify a group by its sources, not by its number. The dendrogram PDF in `work/cluster/out` (its name starts with `dendogram_`) shows how far each source is from the others: the lower your source joins the tree, the closer it is to the sources it joins.
 
 ### Limitations
 
