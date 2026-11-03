@@ -146,6 +146,30 @@ Each `classify` run takes a few seconds, so this suits up to a few hundred keys.
 
 This is the main tool for comparing two sets of your keys (for example two versions of your library), or your keys with the sources the model was built from. It works with any number of keys: `dist` processes about 1 million keys in 5 minutes.
 
+### No keys yet?
+
+**Generate two sets.** With OpenSSL, 1,000 keys take about a minute per set:
+
+```bash
+mkdir -p work/keys-v1 work/keys-v2
+for i in $(seq 1 1000); do openssl genrsa -out work/keys-v1/key$i.pem 2048 2>/dev/null; done
+for i in $(seq 1 1000); do openssl genrsa -out work/keys-v2/key$i.pem 2048 2>/dev/null; done
+```
+
+Then follow steps 1 to 3. Both sets come from the same library, so step 3 shows what "no difference" looks like: a few percentage points per feature at most. Comparing either set with the model's OpenSSL sources (below) shows how your OpenSSL version (`openssl version`) differs from those collected until 2020.
+
+**Or use the sample keys in the repository.** [datasets/baby_dataset](../datasets/baby_dataset) holds 10 keys from each of 7 smartcards whose sources are in the model. They are already packed as datasets, so skip step 1:
+
+```bash
+rsabias -a dist -i datasets/baby_dataset -o work/dist-baby -t $TRANS
+# a sample against the model's distribution of the same card
+rsabias-tool compare_dist "rsabias/model/distributions/Card/G&D/SmartCafe 6.0/512/dist.json" "work/dist-baby/Card/G&D/SmartCafe 6.0/512/dist.json"
+# two different cards
+rsabias-tool compare_dist "work/dist-baby/Card/Athena/IDProtect/512/dist.json" "work/dist-baby/Card/G&D/SmartCafe 6.0/512/dist.json"
+```
+
+The SmartCafe sample matches its source (overall p = 0.999), while the two cards differ in every feature except ROCA, for example all SmartCafe keys have modular fingerprint 5 and 90% of the Athena keys have 1. Ten keys are too few for the clustering at the end of this walkthrough: each sample forms a group of its own.
+
 ### Step 1: pack the keys into a dataset
 
 `dist` does not read loose key files but datasets. A dataset is a directory with the keys of one source in a key file (here a concatenation of PEM keys) and a `meta.json` that describes the source (category, name, version, key length) and lists the key files with their number of keys:
@@ -213,7 +237,7 @@ modular fingerprint (chi-square p = 0)
      17863   100.00     0.60    -99.40
 ```
 
-Reading it: with many keys, even negligible differences are statistically significant, so judge them by the size in percentage points. For scale, OpenSSL 1.1.0e keys of 1024 and 2048 bits, which come from the same implementation, differ by a total variation distance of 1.2 pp.
+Reading it: with many keys, even negligible differences are statistically significant, so judge them by the size in percentage points. For scale, the model's OpenSSL 1.1.0e keys of 1024 and 2048 bits, which come from the same implementation, differ by a total variation distance of 1.2 pp. With few keys, the total variation distance is inflated by noise, because the keys spread over hundreds of combinations: two sets of 1,000 OpenSSL keys differ by about 20 pp in total, but by less than 4 pp in every single feature. Judge small sets by the per-feature tables.
 
 ### Comparing with the sources of the model
 
