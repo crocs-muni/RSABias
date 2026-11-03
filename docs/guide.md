@@ -81,13 +81,13 @@ docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" \
 
 **Output directories must exist** before `classify`, `evaluate` and `group` run; only `dist` creates its own. Each walkthrough creates them with `mkdir -p`.
 
-The model files used below are in `rsabias/model/`:
+**The transformation.** `dist` and `group` take a transformation with `-t`: a JSON file that says which features to compute from every key. Use the one the model was built with, so that your results can be compared with the model's sources. The walkthroughs refer to it as `$TRANS`; set it in every new shell, from the repository root:
 
 ```bash
 TRANS=rsabias/model/transformations/5p_5q_blum_mod_roca.json
-GROUPS_JSON=rsabias/model/groups/groups.json
-MODEL=rsabias/model
 ```
+
+`classify` needs no `-t`: it always uses this transformation and the model shipped in `rsabias/model/`.
 
 ## 4. Walkthrough 1: classify one key
 
@@ -214,6 +214,7 @@ EOF
 ### Step 2: compute the distributions
 
 ```bash
+# $TRANS is set in the setup (section 3)
 rsabias -a dist -i work/datasets/v1 -o work/dist-v1 -t $TRANS
 rsabias -a dist -i work/datasets/v2 -o work/dist-v2 -t $TRANS
 ```
@@ -293,6 +294,6 @@ The walkthroughs above look at your keys: `classify` scores them against the mod
 | `Failed to read key-data from file, 'utf-8' codec can't decode` | DER key, convert it to PEM |
 | `The private key is encrypted: a passphrase is required` | Remove the passphrase from a copy |
 | `TypeError ... 'NoneType'` in `count_records` during `evaluate` | `records` is missing in `meta.json` |
-| `KeyError` in `evaluate` | `details.group` is missing in `meta.json`, or names a group that is not in `$GROUPS_JSON` |
+| `KeyError` in `evaluate` | `details.group` is missing in `meta.json`, or names a group that is not in `rsabias/model/groups/groups.json` |
 
 When something fails, send us: the command, the full error output, the `meta.json` files involved, `git rev-parse --short HEAD` of your checkout, and whether you used Docker or a local install. Never send keys.
