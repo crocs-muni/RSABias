@@ -54,7 +54,9 @@ The guide uses two commands:
 
 Set them up for Docker or for a local install. The definitions below are for bash and zsh.
 
-**Docker (recommended).** Build the image once and define both commands as shell functions. They mount the repository root, so all paths must lie inside it (hence `work/`). The helper scripts run inside the image, so nothing else needs to be installed:
+Docker is the most reliable setup: the image has a fixed Python and the exact dependency versions of `uv.lock`, so results do not depend on what is installed on your machine. A local install runs faster because no container starts on each call, and paths can lie anywhere, but `pip` installs whatever current versions fit `pyproject.toml`.
+
+**Docker.** Build the image once and define both commands as shell functions. They mount the repository root, so all paths must lie inside it (hence `work/`). The helper scripts run inside the image, so nothing else needs to be installed:
 
 ```bash
 docker build -t rsabias .
