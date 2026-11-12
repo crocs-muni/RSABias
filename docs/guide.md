@@ -39,44 +39,68 @@ Work on copies of the keys, never on the originals.
 
 ## 3. Setup
 
-Clone the repository and run every command in this guide from its root:
+Clone the repository, run every command in this guide from its root, and create `work/` for keys and outputs (git ignores it):
 
 ```bash
 git clone https://github.com/crocs-muni/RSABias.git
 cd RSABias
-mkdir -p work        # keys and outputs go here; git ignores this directory
+mkdir -p work
 ```
 
-**Docker (recommended).** Build the image once, then define a shell function so that the commands below work unchanged. The function mounts the repository root, so all paths must lie inside it (hence `work/`):
+The guide uses two commands:
+
+- `rsabias` runs the tool itself, e.g. `rsabias -a classify ...`.
+- `rsabias-tool <name>` runs one of the helper scripts in `tools/`, e.g. `rsabias-tool compare_dist ...` runs `tools/compare_dist.py`. The helpers are Python scripts that need the tool's dependencies.
+
+Set them up for Docker or for a local install. The definitions below are for bash and zsh.
+
+Docker is the most reliable setup: the image has a fixed Python and the exact dependency versions of `uv.lock`, so results do not depend on what is installed on your machine. A local install runs faster because no container starts on each call, and paths can lie anywhere, but `pip` installs whatever current versions fit `pyproject.toml`.
+
+**Docker.** Build the image once and define both commands as shell functions. They mount the repository root, so all paths must lie inside it (hence `work/`). The helper scripts run inside the image, so nothing else needs to be installed:
 
 ```bash
 docker build -t rsabias .
 rsabias() { docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" rsabias "$@"; }
-rsabias-python() { docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" --entrypoint python rsabias "$@"; }
+rsabias-tool() { docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" --entrypoint python rsabias "tools/$1.py" "${@:2}"; }
 ```
 
-**Local install** (Python 3.11 or newer):
+**Local install** (Python 3.11 or newer). Installing the package provides `rsabias`; `rsabias-tool` runs the helpers with the Python of the virtual environment:
 
 ```bash
 python3 -m venv venv && source venv/bin/activate && pip install .
-alias rsabias-python=python
+rsabias-tool() { python "tools/$1.py" "${@:2}"; }
 ```
 
 Check the setup with `rsabias -h`.
 
+**Without the `rsabias-tool` function**, call the script directly. For example, `rsabias-tool compare_dist work/dist-v1 work/dist-v2` is, with a local install,
+
+```bash
+python tools/compare_dist.py work/dist-v1 work/dist-v2
+```
+
+and with Docker
+
+```bash
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" \
+    --entrypoint python rsabias tools/compare_dist.py work/dist-v1 work/dist-v2
+```
+
 **Output directories must exist** before `classify`, `evaluate` and `group` run; only `dist` creates its own. Each walkthrough creates them with `mkdir -p`.
 
-The model files used below are in `rsabias/model/`:
+**The transformation.** `dist` and `group` take a transformation with `-t`: a JSON file that says which features to compute from every key. Use the one the model was built with, so that your results can be compared with the model's sources. The walkthroughs refer to it as `$TRANS`; set it in every new shell, from the repository root:
 
 ```bash
 TRANS=rsabias/model/transformations/5p_5q_blum_mod_roca.json
-GROUPS_JSON=rsabias/model/groups/groups.json
-MODEL=rsabias/model
 ```
+
+`classify` needs no `-t`: it always uses this transformation and the model shipped in `rsabias/model/`.
+
+**The copy-paste path.** In each walkthrough, the code blocks labelled **[W1-1]**, **[W2-1]**, **[W2-2]**, … are the shortest path through it. Paste them into the terminal in this order, in the same shell where you defined the commands and `$TRANS` above, and they run on generated test keys. Unlabelled code blocks are alternatives (other key formats, your own keys, the sample keys) and can be skipped.
 
 ## 4. Walkthrough 1: classify one key
 
-Generate a test key, classify it and read the result:
+**[W1-1]** Generate a test key and classify it:
 
 ```bash
 mkdir -p work/w1
@@ -86,27 +110,47 @@ rsabias -a classify -i work/w1/key.pem -o work/w1
 
 The output names the most likely group, its precision ("if a key is marked as coming from group X, the model is right in Y% of cases"), its recall, and the sources in the group. `work/w1/key_classification.json` holds the same for all 26 groups, ordered by score. A score of 0 means the group has never produced this combination of features: such groups are ruled out, which for a single key is often the most solid result.
 
-Key formats: the file must hold one unencrypted RSA private key in PEM (PKCS#1 or PKCS#8). Convert other formats first:
+Key formats: the file must hold one unencrypted RSA private key in PEM (PKCS#1 or PKCS#8). The generated key already is; convert keys in other formats first, on a copy. A DER key:
 
 ```bash
-openssl rsa -inform DER -in key.der -out key.pem              # DER
-openssl rsa -in encrypted.pem -out key.pem                    # remove a passphrase
-cp id_rsa key.pem && ssh-keygen -p -m PEM -N "" -f key.pem    # OpenSSH format
+openssl rsa -inform DER -in key.der -out key.pem
+```
+
+A key with a passphrase:
+
+```bash
+openssl rsa -in encrypted.pem -out key.pem
+```
+
+A key in OpenSSH format:
+
+```bash
+cp id_rsa key.pem && ssh-keygen -p -m PEM -N "" -f key.pem
 ```
 
 Do not classify OpenSSH-formatted keys directly: they are read with p and q swapped, which changes the result without an error.
 
 ## 5. Walkthrough 2: which known source do my keys resemble?
 
-With several keys **from one source**, combine their results: the scores of each group are multiplied over all keys, as the model's own evaluation does. Classify each key into its own directory (every run overwrites `key_classification.json`), then summarise:
+With several keys **from one source**, combine their results: the scores of each group are multiplied over all keys, as the model's own evaluation does.
+
+Put copies of the keys into `work/mykeys`, one key per `.pem` file, in the format of walkthrough 1.
+
+**[W2-1]** To try it out first, generate test keys (skip this with your own keys):
 
 ```bash
-# keys in work/mykeys/*.pem
+mkdir -p work/mykeys
+for i in $(seq 1 10); do openssl genrsa -out work/mykeys/key$i.pem 2048; done
+```
+
+**[W2-2]** Classify each key into its own directory (every run overwrites `key_classification.json`), then summarise:
+
+```bash
 for f in work/mykeys/*.pem; do
     n=$(basename "$f" .pem); mkdir -p "work/w2/$n"
     rsabias -a classify -i "$f" -o "work/w2/$n" > /dev/null
 done
-rsabias-python tools/summarize_classification.py work/w2/*/key_classification.json
+rsabias-tool summarize_classification work/w2/*/key_classification.json
 ```
 
 The summary lists the top group of every key, how often each group came first, and the combined ranking with the sources of the top three groups. Groups that any key rules out are excluded.
@@ -123,6 +167,38 @@ Each `classify` run takes a few seconds, so this suits up to a few hundred keys.
 
 This is the main tool for comparing two sets of your keys (for example two versions of your library), or your keys with the sources the model was built from. It works with any number of keys: `dist` processes about 1 million keys in 5 minutes.
 
+### No keys yet?
+
+**[W3-1] Generate two sets.** With OpenSSL, 1,000 keys take about a minute per set:
+
+```bash
+mkdir -p work/keys-v1 work/keys-v2
+for i in $(seq 1 1000); do openssl genrsa -out work/keys-v1/key$i.pem 2048 2>/dev/null; done
+for i in $(seq 1 1000); do openssl genrsa -out work/keys-v2/key$i.pem 2048 2>/dev/null; done
+```
+
+Then follow steps 1 to 3. Both sets come from the same library, so step 3 shows what "no difference" looks like: a few percentage points per feature at most. Comparing either set with the model's OpenSSL sources (below) shows how your OpenSSL version (`openssl version`) differs from those collected until 2020.
+
+**Or use the sample keys in the repository.** [datasets/baby_dataset](../datasets/baby_dataset) holds 10 keys from each of 7 smartcards whose sources are in the model. They are already packed as datasets, so skip step 1. Compute their distributions:
+
+```bash
+rsabias -a dist -i datasets/baby_dataset -o work/dist-baby -t $TRANS
+```
+
+Compare a sample with the model's distribution of the same card:
+
+```bash
+rsabias-tool compare_dist "rsabias/model/distributions/Card/G&D/SmartCafe 6.0/512/dist.json" "work/dist-baby/Card/G&D/SmartCafe 6.0/512/dist.json"
+```
+
+Compare two different cards:
+
+```bash
+rsabias-tool compare_dist "work/dist-baby/Card/Athena/IDProtect/512/dist.json" "work/dist-baby/Card/G&D/SmartCafe 6.0/512/dist.json"
+```
+
+The SmartCafe sample matches its source (overall p = 0.999), while the two cards differ in every feature except ROCA, for example all SmartCafe keys have modular fingerprint 5 and 90% of the Athena keys have 1. Ten keys are too few for the clustering at the end of this walkthrough: each sample forms a group of its own.
+
 ### Step 1: pack the keys into a dataset
 
 `dist` does not read loose key files but datasets. A dataset is a directory with the keys of one source in a key file (here a concatenation of PEM keys) and a `meta.json` that describes the source (category, name, version, key length) and lists the key files with their number of keys:
@@ -138,16 +214,18 @@ This is the main tool for comparing two sets of your keys (for example two versi
 
 `dist` searches its input directory for all `meta.json` files, so one input directory can hold several sources. Other key file formats (JSON lines, CSV) are described in [datasets/baby_dataset/readme.md](../datasets/baby_dataset/readme.md).
 
-`tools/pem2dataset.py` creates a dataset from PEM files. Arguments: output directory, source name, version, key files:
+`tools/pem2dataset.py` creates a dataset from PEM files. Arguments: output directory, source name, version, key files. The examples below take the keys of two versions of your library from `work/keys-v1` and `work/keys-v2`, one key per `.pem` file as in walkthrough 2.
+
+**[W3-2]** Pack both sets:
 
 ```bash
-rsabias-python tools/pem2dataset.py work/datasets/v1/mylib-v1 MyLib 1.0 work/keys-v1/*.pem
-rsabias-python tools/pem2dataset.py work/datasets/v2/mylib-v2 MyLib 2.0 work/keys-v2/*.pem
+rsabias-tool pem2dataset work/datasets/v1/mylib-v1 MyLib 1.0 work/keys-v1/*.pem
+rsabias-tool pem2dataset work/datasets/v2/mylib-v2 MyLib 2.0 work/keys-v2/*.pem
 ```
 
 It skips files it cannot read and keys of a different length than the first, with a warning.
 
-Or create it with the following script, which also works when there are too many keys for one `*.pem` argument list. Set the source details and the key length in `meta.json` to your keys:
+Or, instead of [W3-2], create it with the following script, which also works when there are too many keys for one `*.pem` argument list. Set the source details and the key length in `meta.json` to your keys:
 
 ```bash
 src=work/keys-v1; out=work/datasets/v1/mylib-v1
@@ -166,6 +244,8 @@ EOF
 
 ### Step 2: compute the distributions
 
+**[W3-3]** Compute both distributions (`$TRANS` is set in the setup, section 3):
+
 ```bash
 rsabias -a dist -i work/datasets/v1 -o work/dist-v1 -t $TRANS
 rsabias -a dist -i work/datasets/v2 -o work/dist-v2 -t $TRANS
@@ -175,8 +255,10 @@ Each source gets a `dist.json` with the count of every combination of feature va
 
 ### Step 3: compare
 
+**[W3-4]** Compare the two sets:
+
 ```bash
-rsabias-python tools/compare_dist.py work/dist-v1 work/dist-v2
+rsabias-tool compare_dist work/dist-v1 work/dist-v2
 ```
 
 For each feature, it prints the share of every value in both sets, the difference in percentage points, and a chi-square test; then the total variation distance over all features together, the combinations that differ most, and combinations seen in only one set. An excerpt, comparing the model's 100,000 OpenSSL 1.1.0e keys with 1,000 OpenSSL 3.5.3 keys:
@@ -190,20 +272,22 @@ modular fingerprint (chi-square p = 0)
      17863   100.00     0.60    -99.40
 ```
 
-Reading it: with many keys, even negligible differences are statistically significant, so judge them by the size in percentage points. For scale, OpenSSL 1.1.0e keys of 1024 and 2048 bits, which come from the same implementation, differ by a total variation distance of 1.2 pp.
+Reading it: with many keys, even negligible differences are statistically significant, so judge them by the size in percentage points. For scale, the model's OpenSSL 1.1.0e keys of 1024 and 2048 bits, which come from the same implementation, differ by a total variation distance of 1.2 pp. With few keys, the total variation distance is inflated by noise, because the keys spread over hundreds of combinations: two sets of 1,000 OpenSSL keys differ by about 20 pp in total, but by less than 4 pp in every single feature. Judge small sets by the per-feature tables.
 
 ### Comparing with the sources of the model
 
-The distributions of all 184 sources (source, version and key length) the model was built from are in `rsabias/model/distributions/`. Either side of `compare_dist.py` can be a single `dist.json` or a directory, whose distributions are summed:
+The distributions of all 184 sources (source, version and key length) the model was built from are in `rsabias/model/distributions/`. Either side of `compare_dist.py` can be a single `dist.json` or a directory, whose distributions are summed.
+
+**[W3-5]** Compare the first set with one known source, then with all versions of a library together:
 
 ```bash
-# against one known source
-rsabias-python tools/compare_dist.py rsabias/model/distributions/Library/OpenSSL/1.1.0e/2048/dist.json work/dist-v1
-# against all versions of a library
-rsabias-python tools/compare_dist.py rsabias/model/distributions/Library/OpenSSL work/dist-v1
+rsabias-tool compare_dist rsabias/model/distributions/Library/OpenSSL/1.1.0e/2048/dist.json work/dist-v1
+rsabias-tool compare_dist rsabias/model/distributions/Library/OpenSSL work/dist-v1
 ```
 
-To see which known sources are closest overall, cluster your distribution together with all of them. Your source either joins an existing group or forms its own:
+To see which known sources are closest overall, cluster your distribution together with all of them. Your source either joins an existing group or forms its own.
+
+**[W3-6]** Cluster the first set with all known sources:
 
 ```bash
 mkdir -p work/cluster/in work/cluster/out
@@ -212,7 +296,18 @@ cp -r work/dist-v1/* work/cluster/in/
 rsabias -a group -i work/cluster/in -o work/cluster/out -t $TRANS > work/cluster/out/groups.txt
 ```
 
-`groups.txt` lists the resulting groups as JSON; find your source in it to see which known sources share its group. The dendrogram PDF in `work/cluster/out` shows how far each source is from the others.
+`groups.txt` lists the resulting groups as JSON: a group number, then the sources in the group. Each source is named `<category> <name> <version> <key length>` from its `meta.json`, so the keys packed in step 1 appear as `Library MyLib 1.0 2048` (`pem2dataset.py` sets the category to `Library` unless you pass `--category`). Find that name:
+
+```
+"13": [
+    "Library MyLib 1.0 2048"
+],
+```
+
+- **Alone in its group**, as above: your keys match no known source closely enough. Keys from OpenSSL 3 end up like this.
+- **Together with known sources**: your keys behave like those sources.
+
+The group numbers are assigned anew in every run and need not match the numbers in `rsabias/model/groups/groups.json` or in `classify` results: identify a group by its sources, not by its number. The dendrogram PDF in `work/cluster/out` (its name starts with `dendogram_`) shows how far each source is from the others: the lower your source joins the tree, the closer it is to the sources it joins.
 
 ### Limitations
 
@@ -240,12 +335,15 @@ The walkthroughs above look at your keys: `classify` scores them against the mod
 
 | Problem | Cause and fix |
 |---|---|
+| `rsabias: command not found` or `rsabias-tool: command not found` | The functions of section 3 are defined only in the shell where you ran them. Define them again in every new terminal (or add them to `~/.bashrc`); for a local install, also activate the virtual environment again with `source venv/bin/activate` |
+| `argument -t/--trans: expected one argument` | `$TRANS` is not set in this shell: set it again (section 3) |
+| Syntax errors when defining the functions, e.g. in fish | The commands are for bash and zsh: start `bash` first |
 | `FileNotFoundError` at the end of `classify`, `evaluate` or `group` (`classify` prints its result first, then fails writing the report) | The output directory does not exist: `mkdir -p` it first |
 | `Permission denied` when writing outputs in Docker | The output directory was created by Docker as root. Remove it, create it yourself, and run with `--user "$(id -u):$(id -g)"` (the `rsabias` function above does) |
 | Docker cannot find a file | Paths must lie inside the directory you run from (it is mounted as `/work`); use relative paths |
 | `Failed to read key-data from file, 'utf-8' codec can't decode` | DER key, convert it to PEM |
 | `The private key is encrypted: a passphrase is required` | Remove the passphrase from a copy |
 | `TypeError ... 'NoneType'` in `count_records` during `evaluate` | `records` is missing in `meta.json` |
-| `KeyError` in `evaluate` | `details.group` is missing in `meta.json`, or names a group that is not in `$GROUPS_JSON` |
+| `KeyError` in `evaluate` | `details.group` is missing in `meta.json`, or names a group that is not in `rsabias/model/groups/groups.json` |
 
 When something fails, send us: the command, the full error output, the `meta.json` files involved, `git rev-parse --short HEAD` of your checkout, and whether you used Docker or a local install. Never send keys.
