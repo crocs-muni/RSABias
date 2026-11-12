@@ -1,4 +1,0 @@
-include rsabias/classification_table_template/*
-include rsabias/model/*
-include rsabias/model/transformations/*
-include rsabias/model/groups/*

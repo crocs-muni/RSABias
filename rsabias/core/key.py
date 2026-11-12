@@ -1,5 +1,6 @@
 import json
 import base64
+import math
 import Crypto
 from Crypto.PublicKey import RSA
 
@@ -212,7 +213,7 @@ class Key(dict):
                 id_ = int(split[0])
                 t = int(float(split[1]) * 1000)
                 n = p * q
-                d = int(gmpy2.invert(e, gmpy2.lcm(p-1, q-1)))
+                d = pow(e, -1, math.lcm(p - 1, q - 1))
                 k = {'id': id_, 'n': n, 'e': e, 'p': p, 'q': q, 'd': d, 't': t}
                 return Key.import_dict(k)
 

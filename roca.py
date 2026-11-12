@@ -24,7 +24,7 @@ The fingerprinter supports the following formats:
 Script requirements:
 
     - Tested on Python 2.7.13, 3.4, 3.5, 3.6
-    - pip install cryptography pgpdump coloredlogs future six pycrypto>=2.6 python-dateutil pyx509_ph4 apk_parse_ph4 pyjks M2Crypto
+    - pip install cryptography pgpdump coloredlogs six pycrypto>=2.6 python-dateutil pyx509_ph4 apk_parse_ph4 pyjks M2Crypto
     - some system packages are usually needed for pip to install dependencies (like gcc):
         sudo sudo yum install python-devel python-pip gcc gcc-c++ make automake autoreconf libtool openssl-devel libffi-devel dialog
         sudo apt-get install python-pip python-dev build-essential libssl-dev libffi-dev
@@ -33,17 +33,11 @@ Script requirements:
     https://roca.crocs.fi.muni.cz
 """
 
-from future.utils import iteritems
-from builtins import bytes
-from past.builtins import basestring
-from past.builtins import long
-
 from functools import reduce
 
 import json
 import argparse
 import logging
-import coloredlogs
 import base64
 import hashlib
 import sys
@@ -57,13 +51,27 @@ import traceback
 import datetime
 from math import ceil, log
 
+try:
+    import coloredlogs  # optional, colors the log output
+except ImportError:
+    coloredlogs = None
+
 
 #            '%(asctime)s %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s'
 LOG_FORMAT = '%(asctime)s [%(process)d] %(levelname)s %(message)s'
 
 
 logger = logging.getLogger(__name__)
-coloredlogs.install(level=logging.INFO, fmt=LOG_FORMAT)
+
+
+def install_logging(level):
+    if coloredlogs is not None:
+        coloredlogs.install(level=level, fmt=LOG_FORMAT)
+    else:
+        logging.basicConfig(level=level, format=LOG_FORMAT, force=True)
+
+
+install_logging(logging.INFO)
 
 
 #
@@ -109,7 +117,7 @@ def format_pgp_key(key):
     """
     if key is None:
         return None
-    if isinstance(key, (int, long)):
+    if isinstance(key, int):
         return '%016x' % key
     elif isinstance(key, list):
         return [format_pgp_key(x) for x in key]
@@ -311,7 +319,7 @@ def to_string(x):
     """
     if isinstance(x, bytes):
         return x.decode('utf-8')
-    if isinstance(x, basestring):
+    if isinstance(x, str):
         return x
 
 
@@ -323,7 +331,7 @@ def to_bytes(x):
     """
     if isinstance(x, bytes):
         return x
-    if isinstance(x, basestring):
+    if isinstance(x, str):
         return x.encode('utf-8')
 
 
@@ -457,7 +465,7 @@ class TestResult(object):
     """
     def __init__(self, data=None, **kwargs):
         self._data = collections.OrderedDict(data if data is not None else {})
-        for key, value in iteritems(kwargs):
+        for key, value in kwargs.items():
             self._data[key] = value
 
     @property
@@ -1759,7 +1767,7 @@ class RocaFingerprinter(object):
         :param sub_idx:
         :return:
         """
-        if isinstance(data, (int, long)):
+        if isinstance(data, int):
             js = collections.OrderedDict()
             js['type'] = 'js-mod-num'
             js['fname'] = name
@@ -1941,7 +1949,7 @@ class RocaFingerprinter(object):
         ret = []
         num_certs_found = 0
         for idx, match in enumerate(matches):
-            match = re.sub('[\r\t\n\s]', '', match)
+            match = re.sub(r'[\r\t\n\s]', '', match)
             try:
                 bindata = base64.b64decode(match)
                 x509 = load_der_x509_certificate(bindata, self.get_backend())
@@ -2243,7 +2251,7 @@ class RocaFingerprinter(object):
         self.args = parser.parse_args()
 
         if self.args.debug:
-            coloredlogs.install(level=logging.DEBUG, fmt=LOG_FORMAT)
+            install_logging(logging.DEBUG)
 
         self.work()
 

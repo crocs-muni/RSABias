@@ -1,0 +1,4 @@
+Group [11] is often missclassified as:
+	group g[15] in 15.0% cases
+Group [3] is often missclassified as:
+	group g[2] in 10.0% cases

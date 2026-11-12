@@ -8,9 +8,9 @@ import random
 import copy
 import hashlib
 import numpy as np
-import pkg_resources
 
-
+import rsabias.classification_table_template as template_package
+import rsabias.model as model_package
 from rsabias.core import dataset, features, plot, table, classifier, visualizer, key
 
 
@@ -21,7 +21,7 @@ def classify_key(input_path, output_path):
     :param output_path: Path where the classifier will output the full classification report in json.
     :return: Nothing
     """
-    model_root_path = pkg_resources.resource_filename('rsabias.model', '')
+    model_root_path = os.path.dirname(model_package.__file__)
     trans_path = os.path.join(model_root_path, 'transformations/5p_5q_blum_mod_roca.json')
     groups_json_path = os.path.join(model_root_path, 'groups/groups.json')
     prec_recall_path = os.path.join(model_root_path, 'precision_recall.json')
@@ -174,7 +174,7 @@ def visualize_model_performance(input_path, output_path):
     :param output_path: The path where the table tex file will be stored.
     :return: nothing
     """
-    template_path = pkg_resources.resource_filename('rsabias.classification_table_template', '')
+    template_path = os.path.dirname(template_package.__file__)
     viz = visualizer.ClassificationTableVisualizer(input_path, output_path, template_path)
     viz.construct_table()
 
@@ -586,7 +586,8 @@ def cluster(data_sets_path, output_path, trans_path):
     groups = table.Table.group(metas, dists, trans, out_path=output_path)
     labels = [' '.join(m.source()) for m in metas]
     grouping = dict()
-    for l, g in zip(labels, groups):
+    # fcluster returns numpy integers, which json cannot use as keys
+    for l, g in zip(labels, map(str, groups)):
         if g not in grouping:
             grouping[g] = []
         grouping[g].append(l)

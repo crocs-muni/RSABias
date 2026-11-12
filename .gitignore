@@ -91,3 +91,6 @@ ENV/
 
 # Backup files
 *~
+
+# Working directory of docs/guide.md (keys and outputs)
+work/

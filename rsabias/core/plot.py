@@ -1,3 +1,4 @@
+import hashlib
 import itertools
 import os
 import matplotlib as mpl
@@ -144,11 +145,23 @@ def __cols_rows(figures):
     return cols, rows
 
 
+def safe_filename(name, max_length=200):
+    """
+    Shortens names derived from transformation descriptions, which easily exceed
+    the 255-byte filename limit. Long names are truncated and suffixed with a hash
+    of the full name, so distinct names stay distinct.
+    """
+    if len(name.encode('utf-8')) <= max_length:
+        return name
+    digest = hashlib.sha256(name.encode('utf-8')).hexdigest()[:16]
+    return '{}_{}'.format(name.encode('utf-8')[:max_length - 17].decode('utf-8', 'ignore'), digest)
+
+
 def save(fig_ax, save_path, name, file_format='svg'):
     if fig_ax is None:
         return None
     fig_ax.fig.tight_layout()
-    plt.savefig(os.path.join(save_path, '{}.{}'.format(name, file_format)),
+    plt.savefig(os.path.join(save_path, '{}.{}'.format(safe_filename(name), file_format)),
                 dpi=600)
     plt.close(fig_ax.fig)
 

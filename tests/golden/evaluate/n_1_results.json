@@ -1,0 +1,71 @@
+{
+    "n_keys": 1,
+    "accuracies": {
+        "1": {
+            "11": {
+                "correct": 17,
+                "wrong": 3
+            },
+            "15": {
+                "correct": 10,
+                "wrong": 0
+            },
+            "2": {
+                "correct": 20,
+                "wrong": 0
+            },
+            "26": {
+                "correct": 10,
+                "wrong": 0
+            },
+            "3": {
+                "correct": 9,
+                "wrong": 1
+            }
+        },
+        "2": {
+            "11": {
+                "correct": 20,
+                "wrong": 0
+            },
+            "15": {
+                "correct": 10,
+                "wrong": 0
+            },
+            "2": {
+                "correct": 20,
+                "wrong": 0
+            },
+            "26": {
+                "correct": 10,
+                "wrong": 0
+            },
+            "3": {
+                "correct": 10,
+                "wrong": 0
+            }
+        },
+        "3": {
+            "11": {
+                "correct": 20,
+                "wrong": 0
+            },
+            "15": {
+                "correct": 10,
+                "wrong": 0
+            },
+            "2": {
+                "correct": 20,
+                "wrong": 0
+            },
+            "26": {
+                "correct": 10,
+                "wrong": 0
+            },
+            "3": {
+                "correct": 10,
+                "wrong": 0
+            }
+        }
+    }
+}

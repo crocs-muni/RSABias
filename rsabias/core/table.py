@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import os.path
 import rsabias.core.features as features
 import rsabias.core.dataset as dataset
+import rsabias.core.plot as plot
 
 
 class TableException(Exception):
@@ -72,15 +73,18 @@ class Table:
                 plt.show()
                 tp.disconnect()
                 plt.close(figure)
-                threshold = tp.threshold
+                # Without a display (e.g. Agg backend) plt.show() returns immediately
+                # and no threshold is picked; keep the default then.
+                if tp.threshold is not None:
+                    threshold = tp.threshold
 
                 # plt.show() destroys the picture, draw again for saving
                 figure = plt.figure(figsize=(10, 20))
                 show_dendrogram(linkage, labels, threshold)
                 plt.title(name)
                 #plt.tight_layout()
-                # TODO too long
-                file_path = os.path.join(out_path, 'dendogram_{}_{}.pdf'.format(name, norm))
+                file_path = os.path.join(out_path, '{}.pdf'.format(
+                    plot.safe_filename('dendogram_{}_{}'.format(name, norm))))
                 # file_path = os.path.join(out_path, 'dendogram_{}_{}.pdf'.format('private', norm))
                 plt.savefig(file_path, dpi=3000)
                 plt.close(figure)

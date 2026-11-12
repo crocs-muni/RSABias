@@ -4,11 +4,13 @@ This folder contains a single classification model used in our study. The model 
 
 ## Bayes classifier
 
-The model is provided in a form of a pickle object -- [classification_table_complex.pkl](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/classification_table_complex.pkl) -- that represents  an instance of `ProbaTable` class in the [classifier](https://github.com/crocs-muni/RSABias/blob/master/rsabias/core/classifier.py) module. The model can be directly used with our tool as a command-line argument (see readme in the root of the repository).
+The model is the classification table [classification_table_complex.npz](classification_table_complex.npz): plain numpy arrays with the probability of every feature combination for every group, the feature coordinates and the group names. It loads with any numpy version and without unpickling. The original pickle of the paper, [classification_table_complex.pkl](classification_table_complex.pkl), only loads with the dependency versions of 2020 and is kept for reference. The model can be directly used with our tool as a command-line argument (see readme in the root of the repository).
 
-If the developer aims to reconstruct the model by himself, it can be done by calling
+To load the model in Python:
 
 ```python
+from rsabias.core import classifier
+
 table = classifier.ProbaTable(trans_path, groups_json_path, method)
 table.init_common_structures()
 table.load_classification_tables(table_path, method)
@@ -18,6 +20,7 @@ where
 
 - `trans_path` is a path to [5p_5q_blum_mod_roca.json](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/transformations/5p_5q_blum_mod_roca.json).
 - `groups_json_path` is a path to [groups.json](https://github.com/crocs-muni/RSABias/blob/master/rsabias/model/groups/groups.json).
+- `table_path` is a path to `classification_table_complex.npz`.
 - `method` use a string `complex`.
 
 Then, the model should reside in the `table` variable. Further, it is possible to build the [evaluator](https://github.com/crocs-muni/RSABias/blob/master/rsabias/core/classifier.py) (that runs over a dataset) object with the `table` variable. Using the `Evaluator` object, many interesting tasks can be called that can result the whole dataset.

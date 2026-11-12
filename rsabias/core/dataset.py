@@ -187,7 +187,8 @@ class DataSet:
         for root, dirs, files in os.walk(start):
             if filename in files:
                 parent_paths.append(root)
-        return parent_paths
+        # os.walk order depends on the file system; sort for reproducible runs
+        return sorted(parent_paths)
 
     @staticmethod
     def prepare(path, meta_filename):

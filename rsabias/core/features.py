@@ -1679,7 +1679,8 @@ class MultiDimDistribution(Distribution):
         for dim in range(2):
             i = 0
             for r in vs[dim]:
-                index[dim][r] = i
+                # one-dimensional sides yield bare values, keys are sliced tuples
+                index[dim][r if isinstance(r, tuple) else (r,)] = i
                 i += 1
         for key_tuple, value in self.counts.items():
             x = key_tuple[:divider]

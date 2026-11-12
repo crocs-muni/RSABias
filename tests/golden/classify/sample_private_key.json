@@ -1,0 +1,394 @@
+{
+    "24": {
+        "group_name": "Group 24",
+        "score": 0.023450350877192983,
+        "Precision": 0.902103027216377,
+        "Recall": 0.9682933333333333,
+        "sources": [
+            "Library OpenSSL 1.0.2g 2.0.12 fips 1024",
+            "Library OpenSSL 1.0.2g 2.0.12 fips 2048",
+            "Library OpenSSL 1.0.2g 2.0.12 fips 512",
+            "Library OpenSSL 0.9.7 1024",
+            "Library OpenSSL 0.9.7 2048",
+            "Library OpenSSL 0.9.7 512",
+            "Library OpenSSL 1.0.2k 2.0.14 fips 1024",
+            "Library OpenSSL 1.0.2k 2.0.14 fips 2048",
+            "Library OpenSSL 1.0.2k 2.0.14 fips 512",
+            "Library OpenSSL 1.1.0e 1024",
+            "Library OpenSSL 1.1.0e 2048",
+            "Library OpenSSL 1.1.0e 512",
+            "Library OpenSSL 1.0.2g 1024",
+            "Library OpenSSL 1.0.2g 2048",
+            "Library OpenSSL 1.0.2g 512"
+        ]
+    },
+    "25": {
+        "group_name": "Group 25",
+        "score": 0.007651315789473684,
+        "Precision": 0.7119071850193365,
+        "Recall": 0.5829333333333333,
+        "sources": [
+            "Library OpenSSL 1.0.2g 8-bit 1024",
+            "Library OpenSSL 1.0.2g 8-bit 2048",
+            "Library OpenSSL 1.0.2g 8-bit 512"
+        ]
+    },
+    "11": {
+        "group_name": "Group 11",
+        "score": 0.00013632529685998564,
+        "Precision": 0.21756266750748857,
+        "Recall": 0.069,
+        "sources": [
+            "HSM SafeNet Luna SA-1700 LAN 2048",
+            "Card Feitian JavaCOS A22 1024",
+            "Card Feitian JavaCOS A22 512",
+            "Card Feitian JavaCOS A40 1024",
+            "Card Feitian JavaCOS A40 512",
+            "Card Oberthur Cosmo 64 1024",
+            "Library cryptlib 3.4.3.1 1024",
+            "Library cryptlib 3.4.3.1 2048",
+            "Library cryptlib 3.4.3.1 512",
+            "Library cryptlib 3.4.3 1024",
+            "Library cryptlib 3.4.3 2048",
+            "Library cryptlib 3.4.3 512"
+        ]
+    },
+    "10": {
+        "group_name": "Group 10",
+        "score": 9.832572298325722e-05,
+        "Precision": 0.0,
+        "Recall": 0.0,
+        "sources": [
+            "HSM Thales nShieldF3 512",
+            "Library Mocana new 1024",
+            "Library Bouncy Castle 1.54 1024",
+            "Library Bouncy Castle 1.54 2048",
+            "Library Bouncy Castle 1.54 512"
+        ]
+    },
+    "15": {
+        "group_name": "Group 15",
+        "score": 6.813035579444841e-05,
+        "Precision": 0.37005832793259885,
+        "Recall": 0.0015026315789473685,
+        "sources": [
+            "Card Gemalto GCX4 72K 1024",
+            "Card Gemalto GCX4 72K 512",
+            "Card Athena IDProtect 512",
+            "Library Nettle 3.2 1024",
+            "Library Nettle 3.2 2048",
+            "Library Nettle 3.2 512",
+            "Library Nettle 3.3 1024",
+            "Library Nettle 3.3 2048",
+            "Library Nettle 3.3 512",
+            "Library LibTomCrypt 1.17 1024",
+            "Library LibTomCrypt 1.17 2048",
+            "Library LibTomCrypt 1.17 512",
+            "Library OpenSSL 1.0.2g 2.0.12 fips FIPS 1024",
+            "Library OpenSSL 1.0.2g 2.0.12 fips FIPS 2048",
+            "Library OpenSSL 1.0.2g 2.0.12 fips FIPS 512",
+            "Library OpenSSL 1.0.2k 2.0.14 fips FIPS 1024",
+            "Library OpenSSL 1.0.2k 2.0.14 fips FIPS 2048",
+            "Library OpenSSL 1.0.2k 2.0.14 fips FIPS 512",
+            "Library OpenSSL 2.0.12 FIPS 1024",
+            "Library OpenSSL 2.0.12 FIPS 2048",
+            "Library OpenSSL 2.0.12 FIPS 512",
+            "Library Botan 1.11.29 1024",
+            "Library Botan 1.11.29 2048",
+            "Library Botan 1.11.29 512",
+            "Library Botan 2.1.0 2048",
+            "Library Botan 2.1.0 512",
+            "Library Botan 1.5.6 1024",
+            "Library Botan 1.5.6 2048",
+            "Library Botan 1.5.6 512",
+            "Library WolfSSL 3.9.0 1024",
+            "Library WolfSSL 3.9.0 2048",
+            "Library WolfSSL 3.9.0 512",
+            "Library WolfSSL 3.10.2 1024",
+            "Library WolfSSL 3.10.2 2048",
+            "Library WolfSSL 3.10.2 512",
+            "Library WolfSSL 2.0rc1 1024",
+            "Library WolfSSL 2.0rc1 2048",
+            "Library WolfSSL 2.0rc1 512"
+        ]
+    },
+    "8": {
+        "group_name": "Group 8",
+        "score": 5.507246376811594e-05,
+        "Precision": 0.5652708044012392,
+        "Recall": 0.1628153846153846,
+        "sources": [
+            "Library PuTTY 0.67 1024",
+            "Library mbedTLS 0.10.0 1024",
+            "Library mbedTLS 0.10.0 2048",
+            "Library mbedTLS 0.10.0 512",
+            "Library mbedTLS 1.3.19 1024",
+            "Library mbedTLS 1.3.19 2048",
+            "Library mbedTLS 1.3.19 512",
+            "Library mbedTLS 2.4.2 1024",
+            "Library mbedTLS 2.4.2 2048",
+            "Library mbedTLS 2.4.2 512",
+            "Library mbedTLS 2.2.1 1024",
+            "Library mbedTLS 2.2.1 2048",
+            "Library mbedTLS 2.2.1 512"
+        ]
+    },
+    "14": {
+        "group_name": "Group 14",
+        "score": 4.96019854021357e-05,
+        "Precision": 0.7026258951915426,
+        "Recall": 0.06867777777777778,
+        "sources": [
+            "Library Crypto++ 5.6.3 1024",
+            "Library Crypto++ 5.6.3 2048",
+            "Library Crypto++ 5.6.3 512",
+            "Library Crypto++ 5.6.5 1024",
+            "Library Crypto++ 5.6.5 2048",
+            "Library Crypto++ 5.6.5 512",
+            "Library Crypto++ 5.6.0 1024",
+            "Library Crypto++ 5.6.0 2048",
+            "Library Crypto++ 5.6.0 512",
+            "Library Microsoft CryptoAPI 1024",
+            "Library Microsoft CryptoAPI 2048",
+            "Library Microsoft CryptoAPI 512",
+            "Library Microsoft .NET 1024",
+            "Library Microsoft .NET 2048",
+            "Library Microsoft .NET 512",
+            "Library Microsoft CNG 1024",
+            "Library Microsoft CNG 2048",
+            "Library Microsoft CNG 512"
+        ]
+    },
+    "9": {
+        "group_name": "Group 9",
+        "score": 4.824561403508772e-05,
+        "Precision": 0.27377295134671714,
+        "Recall": 0.12773333333333334,
+        "sources": [
+            "Library Bouncy Castle 1.53 1024",
+            "Library Bouncy Castle 1.53 2048",
+            "Library Bouncy Castle 1.53 512",
+            "Library SunRsaSign OpenJDK 1.8 1024",
+            "Library SunRsaSign OpenJDK 1.8 2048",
+            "Library SunRsaSign OpenJDK 1.8 512"
+        ]
+    },
+    "5": {
+        "group_name": "Group 5",
+        "score": 4.3434343434343435e-05,
+        "Precision": 0.13801406035275812,
+        "Recall": 0.6076,
+        "sources": [
+            "Library Mocana 6.x 2048",
+            "Library Mocana 6.x 512"
+        ]
+    },
+    "16": {
+        "group_name": "Group 16",
+        "score": 3.434343434343434e-05,
+        "Precision": 0.2673735309146653,
+        "Recall": 0.31395,
+        "sources": [
+            "HSM Utimaco Security Server Se50 LAN Appliance 1024",
+            "HSM Utimaco Security Server Se50 LAN Appliance 512"
+        ]
+    },
+    "12": {
+        "group_name": "Group 12",
+        "score": 2.853535173387931e-05,
+        "Precision": 0.018973260554135285,
+        "Recall": 0.5492,
+        "sources": [
+            "Card Taisys SIMoME VAULT 512"
+        ]
+    },
+    "17": {
+        "group_name": "Group 17",
+        "score": 2.3103057757644393e-05,
+        "Precision": 0.7751749315485245,
+        "Recall": 0.05096,
+        "sources": [
+            "Library Nettle 2.0 1024",
+            "Library Nettle 2.0 2048",
+            "Library Nettle 2.0 512",
+            "Library Cryptix JCE 20050328 1024",
+            "Library Cryptix JCE 20050328 2048",
+            "Library Cryptix JCE 20050328 512",
+            "Library Sage Default 512",
+            "Library FlexiProvider 1.7p7 1024",
+            "Library FlexiProvider 1.7p7 2048",
+            "Library FlexiProvider 1.7p7 512"
+        ]
+    },
+    "13": {
+        "group_name": "Group 13",
+        "score": 8.695652173913043e-06,
+        "Precision": 0.04605548912910861,
+        "Recall": 0.47185,
+        "sources": [
+            "Card Gemalto GXP E64 1024",
+            "Card Gemalto GXP E64 512"
+        ]
+    },
+    "7": {
+        "group_name": "Group 7",
+        "score": 0.0,
+        "Precision": 0.40545890682130464,
+        "Recall": 0.07569565217391304,
+        "sources": [
+            "Library Libgcrypt 1.6.5 FIPS 1024",
+            "Library Libgcrypt 1.6.5 FIPS 2048",
+            "Library Libgcrypt 1.6.5 FIPS 512",
+            "Library Libgcrypt 1.6.5 urandom FIPS 1024",
+            "Library Libgcrypt 1.6.5 urandom FIPS 2048",
+            "Library Libgcrypt 1.7.6 1024",
+            "Library Libgcrypt 1.7.6 2048",
+            "Library Libgcrypt 1.7.6 512",
+            "Library Libgcrypt 1.6.5 1024",
+            "Library Libgcrypt 1.6.5 2048",
+            "Library Libgcrypt 1.6.5 512",
+            "Library Libgcrypt 1.6.0 FIPS 1024",
+            "Library Libgcrypt 1.6.0 FIPS 2048",
+            "Library Libgcrypt 1.6.0 urandom FIPS 1024",
+            "Library Libgcrypt 1.6.0 urandom FIPS 2048",
+            "Library Libgcrypt 1.6.5 urandom 1024",
+            "Library Libgcrypt 1.6.5 urandom 2048",
+            "Library Libgcrypt 1.6.5 urandom 512",
+            "Library Libgcrypt 1.6.0 urandom 1024",
+            "Library Libgcrypt 1.7.6 urandom 1024",
+            "Library Libgcrypt 1.7.6 urandom 2048",
+            "Library Libgcrypt 1.7.6 urandom 512",
+            "Library Libgcrypt 1.6.0 1024"
+        ]
+    },
+    "6": {
+        "group_name": "Group 6",
+        "score": 0.0,
+        "Precision": 0.06058450133017377,
+        "Recall": 0.7295,
+        "sources": [
+            "Library PGP SDK 4 1024",
+            "Library PGP SDK 4 2048",
+            "Library PGP SDK 4 512"
+        ]
+    },
+    "4": {
+        "group_name": "Group 4",
+        "score": 0.0,
+        "Precision": 0.9883394361690782,
+        "Recall": 0.9267,
+        "sources": [
+            "Library PGP SDK 4 FIPS 1024",
+            "Library PGP SDK 4 FIPS 2048",
+            "Library PGP SDK 4 FIPS 512"
+        ]
+    },
+    "3": {
+        "group_name": "Group 3",
+        "score": 0.0,
+        "Precision": 0.6951725248621009,
+        "Recall": 0.8633,
+        "sources": [
+            "Card G&D SmartCafe 3.2 1024",
+            "Card G&D SmartCafe 3.2 512"
+        ]
+    },
+    "26": {
+        "group_name": "Group 26",
+        "score": 0.0,
+        "Precision": 0.45728918968355586,
+        "Recall": 1.0,
+        "sources": [
+            "Card G&D StarSign 512"
+        ]
+    },
+    "23": {
+        "group_name": "Group 23",
+        "score": 0.0,
+        "Precision": 0.4796914211357933,
+        "Recall": 0.77415,
+        "sources": [
+            "Card NXP J2E145G 1024",
+            "Card NXP J2D081 1024"
+        ]
+    },
+    "22": {
+        "group_name": "Group 22",
+        "score": 0.0,
+        "Precision": 0.20727556374982273,
+        "Recall": 0.14615,
+        "sources": [
+            "Card NXP J2E145G 512",
+            "Card NXP J2D081 512"
+        ]
+    },
+    "21": {
+        "group_name": "Group 21",
+        "score": 0.0,
+        "Precision": 0.4142393556711108,
+        "Recall": 0.52975,
+        "sources": [
+            "Card NXP JCOP 41 V2.2.1 1024",
+            "Card NXP JCOP 41 V2.2.1 512",
+            "Card NXP J2A081 1024",
+            "Card NXP J2A081 512",
+            "Card NXP J2A080 1024",
+            "Card NXP J2A080 512",
+            "Card NXP J3A081 1024",
+            "Card NXP J3A081 512"
+        ]
+    },
+    "20": {
+        "group_name": "Group 20",
+        "score": 0.0,
+        "Precision": 0.09192483494159472,
+        "Recall": 0.8145,
+        "sources": [
+            "Card Oberthur Cosmo Dual 72K 1024",
+            "Card Oberthur Cosmo Dual 72K 512"
+        ]
+    },
+    "2": {
+        "group_name": "Group 2",
+        "score": 0.0,
+        "Precision": 0.8576145451426856,
+        "Recall": 1.0,
+        "sources": [
+            "Card G&D SmartCafe 6.0 1024",
+            "Card G&D SmartCafe 6.0 512",
+            "Card G&D SmartCafe 4.x 1024",
+            "Card G&D SmartCafe 4.x 512"
+        ]
+    },
+    "19": {
+        "group_name": "Group 19",
+        "score": 0.0,
+        "Precision": 0.4681521893155732,
+        "Recall": 0.4405,
+        "sources": [
+            "Library GNU Crypto 2.0.1 1024",
+            "Library GNU Crypto 2.0.1 2048",
+            "Library GNU Crypto 2.0.1 512"
+        ]
+    },
+    "18": {
+        "group_name": "Group 18",
+        "score": 0.0,
+        "Precision": 0.12498721489209369,
+        "Recall": 0.1222,
+        "sources": [
+            "Library Sage Blum 512",
+            "Library Sage Provable 512"
+        ]
+    },
+    "1": {
+        "group_name": "Group 1",
+        "score": 0.0,
+        "Precision": 1.0,
+        "Recall": 1.0,
+        "sources": [
+            "Card Infineon JTOP 80K 1024",
+            "Card Infineon JTOP 80K 512"
+        ]
+    }
+}

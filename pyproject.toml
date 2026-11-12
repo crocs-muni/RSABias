@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rsabias"
+version = "0.1"
+description = "Tool to analyse RSA key generation and classification"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Matus Nemec", email = "mnemec@mail.muni.cz" }]
+requires-python = ">=3.11"
+# Direct imports only. Lower bounds are the first releases with Python 3.11 wheels; the test suite passes with
+# them on Python 3.11 (uv pip install --resolution lowest-direct).
+dependencies = [
+    "matplotlib>=3.7",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "pycryptodome>=3.19.1",
+    "scipy>=1.10",
+    "seaborn>=0.12",
+    "sympy>=1.12",
+    "xarray>=2023.1",
+]
+
+[project.urls]
+Source = "https://github.com/crocs-muni/RSABias"
+Paper = "https://arxiv.org/abs/2009.06700"
+
+[project.scripts]
+rsabias = "rsabias.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["rsabias*"]
+# model/ subfolders are data, not namespace packages
+namespaces = false
+
+[tool.setuptools.package-data]
+# The legacy .pkl model stays in the repository only; the .npz is the shipped model.
+"rsabias.model" = ["**/*.json", "*.npz", "*.pem", "groups/*.pdf"]
+"rsabias.classification_table_template" = ["*.txt", "*.md", "*.png"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ['slow: builds or clusters a model (minutes); deselect with -m "not slow"']
