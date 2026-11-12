@@ -39,12 +39,12 @@ Work on copies of the keys, never on the originals.
 
 ## 3. Setup
 
-Clone the repository and run every command in this guide from its root:
+Clone the repository, run every command in this guide from its root, and create `work/` for keys and outputs (git ignores it):
 
 ```bash
 git clone https://github.com/crocs-muni/RSABias.git
 cd RSABias
-mkdir -p work        # keys and outputs go here; git ignores this directory
+mkdir -p work
 ```
 
 The guide uses two commands:
@@ -73,12 +73,17 @@ rsabias-tool() { python "tools/$1.py" "${@:2}"; }
 
 Check the setup with `rsabias -h`.
 
-**Without the `rsabias-tool` function**, call the script directly. For example, `rsabias-tool compare_dist work/dist-v1 work/dist-v2` is
+**Without the `rsabias-tool` function**, call the script directly. For example, `rsabias-tool compare_dist work/dist-v1 work/dist-v2` is, with a local install,
 
 ```bash
-python tools/compare_dist.py work/dist-v1 work/dist-v2                     # local install
+python tools/compare_dist.py work/dist-v1 work/dist-v2
+```
+
+and with Docker
+
+```bash
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" \
-    --entrypoint python rsabias tools/compare_dist.py work/dist-v1 work/dist-v2   # Docker
+    --entrypoint python rsabias tools/compare_dist.py work/dist-v1 work/dist-v2
 ```
 
 **Output directories must exist** before `classify`, `evaluate` and `group` run; only `dist` creates its own. Each walkthrough creates them with `mkdir -p`.
@@ -91,9 +96,11 @@ TRANS=rsabias/model/transformations/5p_5q_blum_mod_roca.json
 
 `classify` needs no `-t`: it always uses this transformation and the model shipped in `rsabias/model/`.
 
+**The copy-paste path.** In each walkthrough, the code blocks labelled **[W1-1]**, **[W2-1]**, **[W2-2]**, … are the shortest path through it. Paste them into the terminal in this order, in the same shell where you defined the commands and `$TRANS` above, and they run on generated test keys. Unlabelled code blocks are alternatives (other key formats, your own keys, the sample keys) and can be skipped.
+
 ## 4. Walkthrough 1: classify one key
 
-Generate a test key, classify it and read the result:
+**[W1-1]** Generate a test key and classify it:
 
 ```bash
 mkdir -p work/w1
@@ -103,12 +110,22 @@ rsabias -a classify -i work/w1/key.pem -o work/w1
 
 The output names the most likely group, its precision ("if a key is marked as coming from group X, the model is right in Y% of cases"), its recall, and the sources in the group. `work/w1/key_classification.json` holds the same for all 26 groups, ordered by score. A score of 0 means the group has never produced this combination of features: such groups are ruled out, which for a single key is often the most solid result.
 
-Key formats: the file must hold one unencrypted RSA private key in PEM (PKCS#1 or PKCS#8). Convert other formats first:
+Key formats: the file must hold one unencrypted RSA private key in PEM (PKCS#1 or PKCS#8). The generated key already is; convert keys in other formats first, on a copy. A DER key:
 
 ```bash
-openssl rsa -inform DER -in key.der -out key.pem              # DER
-openssl rsa -in encrypted.pem -out key.pem                    # remove a passphrase
-cp id_rsa key.pem && ssh-keygen -p -m PEM -N "" -f key.pem    # OpenSSH format
+openssl rsa -inform DER -in key.der -out key.pem
+```
+
+A key with a passphrase:
+
+```bash
+openssl rsa -in encrypted.pem -out key.pem
+```
+
+A key in OpenSSH format:
+
+```bash
+cp id_rsa key.pem && ssh-keygen -p -m PEM -N "" -f key.pem
 ```
 
 Do not classify OpenSSH-formatted keys directly: they are read with p and q swapped, which changes the result without an error.
@@ -117,14 +134,16 @@ Do not classify OpenSSH-formatted keys directly: they are read with p and q swap
 
 With several keys **from one source**, combine their results: the scores of each group are multiplied over all keys, as the model's own evaluation does.
 
-Put copies of the keys into `work/mykeys`, one key per `.pem` file, in the format of walkthrough 1. To try it out first, generate test keys:
+Put copies of the keys into `work/mykeys`, one key per `.pem` file, in the format of walkthrough 1.
+
+**[W2-1]** To try it out first, generate test keys (skip this with your own keys):
 
 ```bash
 mkdir -p work/mykeys
 for i in $(seq 1 10); do openssl genrsa -out work/mykeys/key$i.pem 2048; done
 ```
 
-Classify each key into its own directory (every run overwrites `key_classification.json`), then summarise:
+**[W2-2]** Classify each key into its own directory (every run overwrites `key_classification.json`), then summarise:
 
 ```bash
 for f in work/mykeys/*.pem; do
@@ -150,7 +169,7 @@ This is the main tool for comparing two sets of your keys (for example two versi
 
 ### No keys yet?
 
-**Generate two sets.** With OpenSSL, 1,000 keys take about a minute per set:
+**[W3-1] Generate two sets.** With OpenSSL, 1,000 keys take about a minute per set:
 
 ```bash
 mkdir -p work/keys-v1 work/keys-v2
@@ -160,13 +179,21 @@ for i in $(seq 1 1000); do openssl genrsa -out work/keys-v2/key$i.pem 2048 2>/de
 
 Then follow steps 1 to 3. Both sets come from the same library, so step 3 shows what "no difference" looks like: a few percentage points per feature at most. Comparing either set with the model's OpenSSL sources (below) shows how your OpenSSL version (`openssl version`) differs from those collected until 2020.
 
-**Or use the sample keys in the repository.** [datasets/baby_dataset](../datasets/baby_dataset) holds 10 keys from each of 7 smartcards whose sources are in the model. They are already packed as datasets, so skip step 1:
+**Or use the sample keys in the repository.** [datasets/baby_dataset](../datasets/baby_dataset) holds 10 keys from each of 7 smartcards whose sources are in the model. They are already packed as datasets, so skip step 1. Compute their distributions:
 
 ```bash
 rsabias -a dist -i datasets/baby_dataset -o work/dist-baby -t $TRANS
-# a sample against the model's distribution of the same card
+```
+
+Compare a sample with the model's distribution of the same card:
+
+```bash
 rsabias-tool compare_dist "rsabias/model/distributions/Card/G&D/SmartCafe 6.0/512/dist.json" "work/dist-baby/Card/G&D/SmartCafe 6.0/512/dist.json"
-# two different cards
+```
+
+Compare two different cards:
+
+```bash
 rsabias-tool compare_dist "work/dist-baby/Card/Athena/IDProtect/512/dist.json" "work/dist-baby/Card/G&D/SmartCafe 6.0/512/dist.json"
 ```
 
@@ -187,7 +214,9 @@ The SmartCafe sample matches its source (overall p = 0.999), while the two cards
 
 `dist` searches its input directory for all `meta.json` files, so one input directory can hold several sources. Other key file formats (JSON lines, CSV) are described in [datasets/baby_dataset/readme.md](../datasets/baby_dataset/readme.md).
 
-`tools/pem2dataset.py` creates a dataset from PEM files. Arguments: output directory, source name, version, key files. The examples below take the keys of two versions of your library from `work/keys-v1` and `work/keys-v2`, one key per `.pem` file as in walkthrough 2:
+`tools/pem2dataset.py` creates a dataset from PEM files. Arguments: output directory, source name, version, key files. The examples below take the keys of two versions of your library from `work/keys-v1` and `work/keys-v2`, one key per `.pem` file as in walkthrough 2.
+
+**[W3-2]** Pack both sets:
 
 ```bash
 rsabias-tool pem2dataset work/datasets/v1/mylib-v1 MyLib 1.0 work/keys-v1/*.pem
@@ -196,7 +225,7 @@ rsabias-tool pem2dataset work/datasets/v2/mylib-v2 MyLib 2.0 work/keys-v2/*.pem
 
 It skips files it cannot read and keys of a different length than the first, with a warning.
 
-Or create it with the following script, which also works when there are too many keys for one `*.pem` argument list. Set the source details and the key length in `meta.json` to your keys:
+Or, instead of [W3-2], create it with the following script, which also works when there are too many keys for one `*.pem` argument list. Set the source details and the key length in `meta.json` to your keys:
 
 ```bash
 src=work/keys-v1; out=work/datasets/v1/mylib-v1
@@ -215,8 +244,9 @@ EOF
 
 ### Step 2: compute the distributions
 
+**[W3-3]** Compute both distributions (`$TRANS` is set in the setup, section 3):
+
 ```bash
-# $TRANS is set in the setup (section 3)
 rsabias -a dist -i work/datasets/v1 -o work/dist-v1 -t $TRANS
 rsabias -a dist -i work/datasets/v2 -o work/dist-v2 -t $TRANS
 ```
@@ -224,6 +254,8 @@ rsabias -a dist -i work/datasets/v2 -o work/dist-v2 -t $TRANS
 Each source gets a `dist.json` with the count of every combination of feature values, under `<output>/<category>/<name>/<version>/<bitlen>/`.
 
 ### Step 3: compare
+
+**[W3-4]** Compare the two sets:
 
 ```bash
 rsabias-tool compare_dist work/dist-v1 work/dist-v2
@@ -244,16 +276,18 @@ Reading it: with many keys, even negligible differences are statistically signif
 
 ### Comparing with the sources of the model
 
-The distributions of all 184 sources (source, version and key length) the model was built from are in `rsabias/model/distributions/`. Either side of `compare_dist.py` can be a single `dist.json` or a directory, whose distributions are summed:
+The distributions of all 184 sources (source, version and key length) the model was built from are in `rsabias/model/distributions/`. Either side of `compare_dist.py` can be a single `dist.json` or a directory, whose distributions are summed.
+
+**[W3-5]** Compare the first set with one known source, then with all versions of a library together:
 
 ```bash
-# against one known source
 rsabias-tool compare_dist rsabias/model/distributions/Library/OpenSSL/1.1.0e/2048/dist.json work/dist-v1
-# against all versions of a library
 rsabias-tool compare_dist rsabias/model/distributions/Library/OpenSSL work/dist-v1
 ```
 
-To see which known sources are closest overall, cluster your distribution together with all of them. Your source either joins an existing group or forms its own:
+To see which known sources are closest overall, cluster your distribution together with all of them. Your source either joins an existing group or forms its own.
+
+**[W3-6]** Cluster the first set with all known sources:
 
 ```bash
 mkdir -p work/cluster/in work/cluster/out
